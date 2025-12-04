@@ -45,3 +45,5 @@ storybook-static
 
 # Misc
 .gemini
+
+*.md
