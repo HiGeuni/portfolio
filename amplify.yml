@@ -1,0 +1,19 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm install -g pnpm
+        - pnpm config set store-dir .pnpm-store
+        - pnpm install
+    build:
+      commands:
+        - pnpm run build
+  artifacts:
+    # adapter-auto가 Amplify를 감지하지 못할 경우 adapter-static을 사용하고 build 폴더로 출력하도록 설정해야 할 수 있습니다.
+    baseDirectory: build
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - .pnpm-store/**/*
