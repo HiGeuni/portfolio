@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Motion } from 'svelte-motion';
   import { inview } from 'svelte-inview';
-  import { enhance } from '$app/forms';
+  import emailjs from '@emailjs/browser';
   import {
     Mail,
     Phone,
@@ -15,6 +15,34 @@
   import Reveal from './Reveal.svelte';
 
   let formState: 'idle' | 'submitting' | 'success' | 'error' = 'idle';
+
+  const handleSubmit = async (e: Event) => {
+    e.preventDefault();
+    formState = 'submitting';
+    const form = e.target as HTMLFormElement;
+
+    try {
+      await emailjs.sendForm(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        form,
+        {
+          publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+        }
+      );
+      formState = 'success';
+      form.reset();
+      setTimeout(() => {
+        formState = 'idle';
+      }, 5000);
+    } catch (error) {
+      console.error('FAILED...', error);
+      formState = 'error';
+      setTimeout(() => {
+        formState = 'idle';
+      }, 5000);
+    }
+  };
 
   const contactInfo = [
     {
@@ -104,34 +132,14 @@
             Send a Message
           </h3>
 
-          <form
-            method="POST"
-            use:enhance={() => {
-              formState = 'submitting';
-              return async ({ result, update }) => {
-                if (result.type === 'success') {
-                  formState = 'success';
-                  setTimeout(() => {
-                    formState = 'idle';
-                  }, 5000);
-                } else {
-                  formState = 'error';
-                  setTimeout(() => {
-                    formState = 'idle';
-                  }, 5000);
-                }
-                await update();
-              };
-            }}
-            class="relative z-10 space-y-4 md:space-y-6"
-          >
+          <form on:submit={handleSubmit} class="relative z-10 space-y-4 md:space-y-6">
             <div class="grid gap-4 md:grid-cols-2 md:gap-6">
               <div class="space-y-1.5 md:space-y-2">
                 <label for="name" class="ml-1 text-sm font-medium text-gray-700">Name</label>
                 <input
                   type="text"
                   id="name"
-                  name="user_name"
+                  name="name"
                   required
                   class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-base transition-all duration-200 outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200"
                   placeholder="John Doe"
@@ -142,7 +150,7 @@
                 <input
                   type="email"
                   id="email"
-                  name="user_email"
+                  name="email"
                   required
                   class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-base transition-all duration-200 outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200"
                   placeholder="john@example.com"
@@ -155,7 +163,7 @@
               <input
                 type="text"
                 id="subject"
-                name="subject"
+                name="title"
                 required
                 class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-base transition-all duration-200 outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200"
                 placeholder="Project Inquiry"
