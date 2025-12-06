@@ -3,15 +3,16 @@ frontend:
   phases:
     preBuild:
       commands:
-        - npm install -g pnpm
-        - pnpm install
+        - npm install
     build:
       commands:
-        - pnpm run build
+        - npm run build
   artifacts:
-    baseDirectory: .amplify-hosting
+    baseDirectory: .
     files:
-      - '**/*'
+      - build/**/*
+      - node_modules/**/*
+      - package.json
   cache:
     paths:
       - node_modules/**/*
