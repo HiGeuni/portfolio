@@ -35,9 +35,7 @@
   };
 </script>
 
-<section
-  class="relative flex min-h-screen items-center justify-center overflow-hidden bg-gray-50 pt-16"
->
+<section class="relative flex min-h-screen flex-col overflow-hidden bg-gray-50 pt-16">
   <!-- Background Elements -->
   <div class="absolute inset-0 z-0">
     <div
@@ -79,7 +77,7 @@
     </Motion>
   </div>
 
-  <div class="relative z-10 container mx-auto px-6">
+  <div class="relative z-10 container mx-auto flex flex-1 flex-col justify-center px-6 py-12">
     <div class="mx-auto max-w-4xl text-center">
       <Motion
         initial={{ opacity: 0, y: 20 }}
@@ -174,7 +172,7 @@
   </div>
 
   <!-- Stats/Tech Badge -->
-  <div class="absolute bottom-0 w-full border-t border-gray-100 bg-white/50 py-6 backdrop-blur-sm">
+  <div class="relative w-full border-t border-gray-100 bg-white/50 py-6 backdrop-blur-sm">
     <div class="container mx-auto px-6">
       <div class="flex flex-wrap justify-center gap-8 text-center md:gap-16">
         <div>

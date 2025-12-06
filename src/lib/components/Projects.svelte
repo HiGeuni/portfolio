@@ -269,7 +269,7 @@
       <!-- Modal Card -->
       <!-- <Motion layoutId={`card-container-${selectedProject.id}`} let:motion> -->
       <div
-        class="relative flex max-h-[90vh] w-full max-w-5xl flex-col overflow-hidden rounded-3xl bg-white shadow-2xl md:max-h-[85vh] md:flex-row"
+        class="relative flex max-h-[90vh] w-full max-w-5xl flex-col overflow-hidden rounded-3xl shadow-2xl md:max-h-[85vh] md:flex-row"
         onclick={(e) => e.stopPropagation()}
         role="document"
         tabindex="-1"
@@ -332,7 +332,7 @@
         <!-- </Motion> -->
 
         <!-- Right / Bottom Content Section -->
-        <div class="w-full p-8 md:w-2/3 md:overflow-y-auto md:p-12">
+        <div class="w-full flex-1 overflow-y-auto bg-white p-8 md:w-2/3 md:p-12">
           <button
             class="absolute top-4 right-4 z-50 rounded-full bg-gray-100 p-2 transition-colors hover:bg-gray-200"
             onclick={() => (selectedId = null)}
