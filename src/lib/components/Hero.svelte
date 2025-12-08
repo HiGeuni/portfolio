@@ -5,26 +5,54 @@
   import { t, locale } from '$lib/i18n';
 
   // Typewriter effect logic
-  // Typewriter effect logic
   let displayText = $state('');
-  let i = $state(0);
 
-  // Reset typewriter when language changes
   $effect(() => {
-    displayText = '';
-    i = 0;
-    const text = t.hero.role;
+    const roles = t.hero.role;
 
-    const interval = setInterval(() => {
-      if (i < text.length) {
-        displayText += text.charAt(i);
-        i++;
+    // Reset state when language changes
+    let roleIndex = 0;
+    let isDeleting = false;
+    let currentText = '';
+    displayText = ''; // Sync initial state
+
+    if (!Array.isArray(roles)) {
+      displayText = roles; // Fallback if string
+      return;
+    }
+
+    let timer: ReturnType<typeof setTimeout>;
+
+    const loop = () => {
+      const currentRole = roles[roleIndex % roles.length];
+
+      let nextSpeed = 100;
+
+      if (isDeleting) {
+        currentText = currentRole.substring(0, currentText.length - 1);
+        nextSpeed = 50;
       } else {
-        clearInterval(interval);
+        currentText = currentRole.substring(0, currentText.length + 1);
+        nextSpeed = 100;
       }
-    }, 100);
 
-    return () => clearInterval(interval);
+      displayText = currentText;
+
+      if (!isDeleting && currentText === currentRole) {
+        nextSpeed = 2000; // Pause at end
+        isDeleting = true;
+      } else if (isDeleting && currentText === '') {
+        isDeleting = false;
+        roleIndex++;
+        nextSpeed = 500; // Pause before next word
+      }
+
+      timer = setTimeout(loop, nextSpeed);
+    };
+
+    loop();
+
+    return () => clearTimeout(timer);
   });
 
   const scrollToSection = (id: string) => {
@@ -35,7 +63,9 @@
   };
 </script>
 
-<section class="relative flex min-h-screen flex-col overflow-hidden bg-gray-50 pt-16">
+<section
+  class="relative flex max-h-[1080px] min-h-screen flex-col overflow-hidden bg-gray-50 pt-16"
+>
   <!-- Background Elements -->
   <div class="absolute inset-0 z-0">
     <div
@@ -94,9 +124,10 @@
 
           <h1 class="mb-6 text-5xl font-bold tracking-tight text-gray-900 md:text-7xl">
             {t.hero.greeting}
+            <br />
             <span
               class="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent"
-              >HyoGeun Kim</span
+              >{t.hero.name}</span
             >
             <br />
             <span class="mt-2 block min-h-[1.2em] text-4xl font-medium text-gray-700 md:text-6xl">

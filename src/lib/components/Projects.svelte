@@ -3,113 +3,13 @@
   import { inview } from 'svelte-inview';
   import { X, ExternalLink, Github, ChevronRight, Target, Lightbulb, Zap } from 'lucide-svelte';
   import Reveal from './Reveal.svelte';
-  import awarelabImg from '$lib/assets/projects/awarelab.png';
-  import prestigeImg from '$lib/assets/projects/prestige.png';
-  import kumoImg from '$lib/assets/projects/kumo.png';
-  import awarelabLogo from '$lib/assets/projects/screenshots/awarelab/logo.png';
-  import awarelabShot1 from '$lib/assets/projects/screenshots/awarelab/logo.png';
-  import awarelabShot2 from '$lib/assets/projects/screenshots/awarelab_2.png';
-  import prestigeBookmark from '$lib/assets/projects/screenshots/the-prestige/bookmark.png';
-  import facilityDetail from '$lib/assets/projects/screenshots/the-prestige/facility-detail.png';
-  import inquiry from '$lib/assets/projects/screenshots/the-prestige/inquiry.png';
-  import main from '$lib/assets/projects/screenshots/the-prestige/main.png';
-  import prestigeLogo from '$lib/assets/projects/screenshots/the-prestige/logo.png';
-  import kumoAbstract from '$lib/assets/projects/screenshots/kumo/abstract.gif';
-  import kumoMain from '$lib/assets/projects/screenshots/kumo/main.gif';
-  import kumoLogo from '$lib/assets/projects/screenshots/kumo/logo.png';
-  import kumoApplicationDeploy from '$lib/assets/projects/screenshots/kumo/application-deploy.jpg';
-  import kumoEnvironmentBranch from '$lib/assets/projects/screenshots/kumo/environment-branch.jpg';
-  import kumoOptionChange from '$lib/assets/projects/screenshots/kumo/optionChange.gif';
+  import { t } from '$lib/i18n';
 
   let selectedId = $state<number | null>(null);
   let sectionInView = $state(false);
   let showFeaturedOnly = $state(true);
 
-  const projects = [
-    {
-      id: 1,
-      title: 'AwareLab Membership',
-      category: 'Fintech / SaaS',
-      imageUrl: awarelabLogo,
-      isFeatured: true,
-      gallery: [
-        { src: awarelabShot1, caption: 'Real-time investment dashboard with advanced charting' },
-        { src: awarelabShot2, caption: 'Seamless mobile responsiveness for on-the-go access' },
-      ],
-      image: 'bg-gradient-to-br from-green-400 to-emerald-600',
-      role: 'Lead Frontend Engineer',
-      description: 'Investment portfolio analysis platform with high-performance charts.',
-      problem:
-        'Users needed a fast, reliable platform for complex investment data analysis with real-time updates.',
-      solution:
-        'Built a high-performance web app using Next.js 16 and FSD architecture, integrating Stripe for payments and Directus for content.',
-      challenges:
-        'Optimizing large JS bundles and handling complex chart rendering. Solved by code splitting (46% load improvement) and dynamic imports.',
-      tech: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS', 'Stripe', 'Directus'],
-      features: [
-        'Real-time Charts',
-        'Stripe Subscription',
-        'Portfolio Analysis',
-        'FSD Architecture',
-      ],
-      impact: [
-        'Bundle size reduced 253KB → 136KB',
-        '46% faster initial load',
-        'Seamless payment integration',
-      ],
-      links: { demo: '#', github: '#' },
-    },
-    {
-      id: 2,
-      title: 'The Prestige',
-      category: 'Location Service',
-      imageUrl: prestigeLogo,
-      isFeatured: true,
-      gallery: [
-        { src: main, caption: 'Main page with Kakao Map API' },
-        { src: facilityDetail, caption: 'Facility detail page' },
-        { src: inquiry, caption: 'Inquiry page' },
-        { src: prestigeBookmark, caption: 'Bookmark page' },
-      ],
-      image: 'bg-gradient-to-br from-emerald-500 to-teal-700',
-      role: 'Frontend Engineer',
-      description: 'Funeral home location visualization service with map integration.',
-      problem: 'Users found it difficult to find and filter funeral home locations efficiently.',
-      solution:
-        'Implemented a map-based visualization with Kakao Map API and optimized image loading for a smooth experience.',
-      challenges:
-        'Managing heavy image assets and complex filter logic. Solved with Image CDN + Lazy Loading and refactoring filter UX.',
-      tech: ['Next.js', 'Vite', 'Recoil', 'Kakao Map API'],
-      features: ['Map Visualization', 'Location Filtering', 'Image Gallery', 'Tab-based UI'],
-      impact: ['Improved UX with tab-based filtering', 'Optimized image loading performance'],
-      links: { demo: '#', github: '#' },
-    },
-    {
-      id: 3,
-      title: 'Kumo Factory',
-      category: 'Cloud DevOps Tool',
-      imageUrl: kumoLogo,
-      isFeatured: true,
-      gallery: [
-        { src: kumoMain, caption: 'Intuitive Drag & Drop infrastructure designer' },
-        { src: kumoAbstract, caption: 'Real-time deployment logs via SSE' },
-        { src: kumoApplicationDeploy, caption: 'Real-time deployment logs via SSE' },
-        { src: kumoOptionChange, caption: 'Real-time deployment logs via SSE' },
-        { src: kumoEnvironmentBranch, caption: 'Real-time deployment logs via SSE' },
-      ],
-      image: 'bg-gradient-to-br from-teal-400 to-cyan-600',
-      role: 'Frontend Engineer',
-      description: 'No-Code Cloud Deployment Platform with Drag & Drop UI.',
-      problem: 'Cloud deployment is complex and intimidating for beginners.',
-      solution: 'Created a Drag & Drop interface for designing cloud infrastructure visually.',
-      challenges:
-        'Visualizing deployment status in real-time. Solved using Server-Sent Events (SSE) for live logs.',
-      tech: ['Next.js 13', 'Tailwind CSS', 'Zustand', 'SSE'],
-      features: ['Drag & Drop UI', 'Real-time Logs (SSE)', 'Cloud Architecture Design'],
-      impact: ['Simplified cloud deployment process', 'SSR based UX optimization'],
-      links: { demo: '#', github: '#' },
-    },
-  ];
+  let projects = $derived(t.projects.list);
 
   $effect(() => {
     if (selectedId !== null) {
@@ -136,14 +36,14 @@
   <div class="relative z-10 container mx-auto px-6">
     <Reveal>
       <div class="mb-16 text-center">
-        <h2 class="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">Featured Projects</h2>
-        <p class="text-lg text-gray-600">A selection of my recent work.</p>
+        <h2 class="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">{t.projects.title}</h2>
+        <p class="text-lg text-gray-600">{t.projects.description}</p>
       </div>
     </Reveal>
 
     <div class="mb-8 flex items-center justify-end gap-3 px-1">
       <label for="featured-toggle" class="cursor-pointer text-sm font-medium text-gray-600">
-        Show Featured Only
+        {t.projects.showFeatured}
       </label>
       <input
         id="featured-toggle"
@@ -233,7 +133,8 @@
             <div
               class="flex items-center text-sm font-medium text-green-600 transition-transform group-hover:translate-x-1"
             >
-              View Case Study <ChevronRight size={16} class="ml-1" />
+              {t.projects.viewCaseStudy}
+              <ChevronRight size={16} class="ml-1" />
             </div>
           </div>
         </div>
@@ -352,7 +253,9 @@
               <div class="rounded-2xl border border-red-100 bg-red-50 p-6">
                 <div class="mb-4 flex items-center gap-3 text-red-600">
                   <Target size={24} />
-                  <h3 class="text-sm font-bold tracking-wider uppercase">The Problem</h3>
+                  <h3 class="text-sm font-bold tracking-wider uppercase">
+                    {t.projects.modal.problem}
+                  </h3>
                 </div>
                 <p class="leading-relaxed text-gray-700">
                   {selectedProject.problem}
@@ -362,7 +265,9 @@
               <div class="rounded-2xl border border-green-100 bg-green-50 p-6">
                 <div class="mb-4 flex items-center gap-3 text-green-600">
                   <Lightbulb size={24} />
-                  <h3 class="text-sm font-bold tracking-wider uppercase">The Solution</h3>
+                  <h3 class="text-sm font-bold tracking-wider uppercase">
+                    {t.projects.modal.solution}
+                  </h3>
                 </div>
                 <p class="leading-relaxed text-gray-700">
                   {selectedProject.solution}
@@ -374,7 +279,9 @@
             <div class="rounded-2xl border border-amber-100 bg-amber-50 p-6">
               <div class="mb-4 flex items-center gap-3 text-amber-600">
                 <Zap size={24} />
-                <h3 class="text-sm font-bold tracking-wider uppercase">Technical Challenges</h3>
+                <h3 class="text-sm font-bold tracking-wider uppercase">
+                  {t.projects.modal.challenges}
+                </h3>
               </div>
               <p class="leading-relaxed text-gray-700">
                 {selectedProject.challenges}
@@ -387,7 +294,7 @@
                   class="mb-6 flex items-center gap-2 text-sm font-bold tracking-wider text-gray-900 uppercase"
                 >
                   <ChevronRight size={16} class="text-green-500" />
-                  Key Features
+                  {t.projects.modal.features}
                 </h3>
                 <ul class="space-y-4">
                   {#each selectedProject.features as feature}
@@ -404,7 +311,7 @@
                   class="mb-6 flex items-center gap-2 text-sm font-bold tracking-wider text-gray-900 uppercase"
                 >
                   <ChevronRight size={16} class="text-green-500" />
-                  Impact
+                  {t.projects.modal.impact}
                 </h3>
                 <ul class="space-y-4">
                   {#each selectedProject.impact as item}
@@ -419,7 +326,7 @@
 
             <div>
               <h3 class="mb-6 text-sm font-bold tracking-wider text-gray-900 uppercase">
-                Technologies Used
+                {t.projects.modal.tech}
               </h3>
               <div class="flex flex-wrap gap-3">
                 {#each selectedProject.tech as t}
@@ -435,7 +342,7 @@
             {#if selectedProject.gallery && selectedProject.gallery.length > 0}
               <div>
                 <h3 class="mb-6 text-sm font-bold tracking-wider text-gray-900 uppercase">
-                  Gallery
+                  {t.projects.modal.gallery}
                 </h3>
                 <div class="grid gap-6 md:grid-cols-2">
                   {#each selectedProject.gallery as item}

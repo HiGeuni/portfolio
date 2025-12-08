@@ -13,6 +13,7 @@
     AlertCircle,
   } from 'lucide-svelte';
   import Reveal from './Reveal.svelte';
+  import { t } from '$lib/i18n';
 
   let formState: 'idle' | 'submitting' | 'success' | 'error' = 'idle';
 
@@ -44,10 +45,10 @@
     }
   };
 
-  const contactInfo = [
+  let contactInfo = $derived([
     {
       icon: Mail,
-      label: 'Email',
+      label: t.contact.info.email,
       value: 'khyogeun_@naver.com',
       href: 'mailto:khyogeun_@naver.com',
       color: 'text-blue-500',
@@ -55,7 +56,7 @@
     },
     {
       icon: Phone,
-      label: 'Phone',
+      label: t.contact.info.phone,
       value: '+82 10-4697-3837',
       href: 'tel:+821046973837',
       color: 'text-green-500',
@@ -63,13 +64,13 @@
     },
     {
       icon: Github,
-      label: 'GitHub',
+      label: t.contact.info.github,
       value: 'github.com/HiGeuni',
       href: 'https://github.com/HiGeuni',
       color: 'text-gray-900',
       bg: 'bg-gray-50',
     },
-  ];
+  ]);
 </script>
 
 <section id="contact" class="bg-gray-50 py-16 md:py-24">
@@ -78,10 +79,11 @@
       <!-- Contact Info -->
       <div>
         <Reveal>
-          <h2 class="mb-4 text-3xl font-bold text-gray-900 md:mb-6 md:text-4xl">Let's Connect</h2>
+          <h2 class="mb-4 text-3xl font-bold text-gray-900 md:mb-6 md:text-4xl">
+            {t.contact.title}
+          </h2>
           <p class="mb-8 text-base leading-relaxed text-gray-600 md:mb-12 md:text-lg">
-            I'm currently available for freelance work or full-time positions. If you have a project
-            that needs some creative touch, or just want to say hi, feel free to drop me a message.
+            {t.contact.description}
           </p>
         </Reveal>
 
@@ -129,56 +131,64 @@
           ></div>
 
           <h3 class="relative z-10 mb-6 text-xl font-bold text-gray-900 md:mb-8 md:text-2xl">
-            Send a Message
+            {t.contact.form.title}
           </h3>
 
           <form on:submit={handleSubmit} class="relative z-10 space-y-4 md:space-y-6">
             <div class="grid gap-4 md:grid-cols-2 md:gap-6">
               <div class="space-y-1.5 md:space-y-2">
-                <label for="name" class="ml-1 text-sm font-medium text-gray-700">Name</label>
+                <label for="name" class="ml-1 text-sm font-medium text-gray-700"
+                  >{t.contact.form.name}</label
+                >
                 <input
                   type="text"
                   id="name"
                   name="name"
                   required
                   class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-base transition-all duration-200 outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200"
-                  placeholder="John Doe"
+                  placeholder={t.contact.form.placeholders.name}
                 />
               </div>
               <div class="space-y-1.5 md:space-y-2">
-                <label for="email" class="ml-1 text-sm font-medium text-gray-700">Email</label>
+                <label for="email" class="ml-1 text-sm font-medium text-gray-700"
+                  >{t.contact.form.email}</label
+                >
                 <input
                   type="email"
                   id="email"
                   name="email"
                   required
                   class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-base transition-all duration-200 outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200"
-                  placeholder="john@example.com"
+                  placeholder={t.contact.form.placeholders.email}
                 />
               </div>
             </div>
 
             <div class="space-y-1.5 md:space-y-2">
-              <label for="subject" class="ml-1 text-sm font-medium text-gray-700">Subject</label>
+              <label for="subject" class="ml-1 text-sm font-medium text-gray-700"
+                >{t.contact.form.subject}</label
+              >
               <input
                 type="text"
                 id="subject"
                 name="title"
                 required
                 class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-base transition-all duration-200 outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200"
-                placeholder="Project Inquiry"
+                placeholder={t.contact.form.placeholders.subject}
               />
             </div>
 
             <div class="space-y-1.5 md:space-y-2">
-              <label for="message" class="ml-1 text-sm font-medium text-gray-700">Message</label>
+              <label for="message" class="ml-1 text-sm font-medium text-gray-700"
+                >{t.contact.form.message}</label
+              >
               <textarea
                 id="message"
                 name="message"
                 rows="4"
                 required
                 class="w-full resize-none rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-base transition-all duration-200 outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200"
-                placeholder="Tell me about your project..."
+                placeholder={t.contact.form.placeholders.message}
               ></textarea>
             </div>
 
@@ -194,18 +204,18 @@
               }`}
             >
               {#if formState === 'idle'}
-                <span>Send Message</span>
+                <span>{t.contact.form.submit}</span>
                 <Send size={18} />
               {:else if formState === 'submitting'}
                 <div
                   class="h-5 w-5 animate-spin rounded-full border-2 border-white/30 border-t-white"
                 ></div>
-                <span>Sending...</span>
+                <span>{t.contact.form.sending}</span>
               {:else if formState === 'success'}
-                <span>Message Sent!</span>
+                <span>{t.contact.form.success}</span>
                 <Check size={18} />
               {:else if formState === 'error'}
-                <span>Failed to Send</span>
+                <span>{t.contact.form.error}</span>
                 <AlertCircle size={18} />
               {/if}
             </button>
