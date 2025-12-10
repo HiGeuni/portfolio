@@ -21,6 +21,8 @@
   import msIcon144 from '$lib/assets/favicon/ms-icon-144x144.png';
   import manifest from '$lib/assets/favicon/manifest.json?url';
 
+  import ogImage from '$lib/assets/op-image.png';
+
   let { children } = $props();
 </script>
 
@@ -53,7 +55,7 @@
   <meta property="og:url" content={$page.url.href} />
   <meta property="og:title" content={t.seo.ogTitle} />
   <meta property="og:description" content={t.seo.ogDescription} />
-  <!-- <meta property="og:image" content="" /> -->
+  <meta property="og:image" content={ogImage} />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
