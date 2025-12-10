@@ -30,6 +30,16 @@ export const en = {
     resume: 'Resume',
     letsTalk: "Let's Talk",
   },
+  seo: {
+    title: 'HyoGeun Kim | Frontend Engineer',
+    description:
+      'Portfolio of HyoGeun Kim, a Frontend Engineer specializing in Web Performance Optimization and FSD Architecture.',
+    keywords:
+      'Frontend Engineer, Web Performance, FSD Architecture, React, Next.js, SvelteKit, Portfolio',
+    ogTitle: 'HyoGeun Kim | Frontend Engineer',
+    ogDescription:
+      'Check out my portfolio and projects. Specializing in Web Performance Optimization and FSD Architecture.',
+  },
   skills: {
     title: 'Technical Skills',
     description: 'Technologies I work with to bring ideas to life.',
@@ -290,6 +300,16 @@ export const ko = {
     contact: '연락처',
     resume: '이력서',
     letsTalk: '대화하기',
+  },
+  seo: {
+    title: '김효근 | 프론트엔드 엔지니어',
+    description:
+      '웹 성능 최적화와 FSD 아키텍처를 전문으로 하는 프론트엔드 엔지니어 김효근의 포트폴리오입니다.',
+    keywords:
+      '프론트엔드 엔지니어, 웹 성능 최적화, FSD 아키텍처, React, Next.js, SvelteKit, 포트폴리오',
+    ogTitle: '김효근 | 프론트엔드 엔지니어',
+    ogDescription:
+      '저의 포트폴리오와 프로젝트를 확인해보세요. 웹 성능 최적화와 FSD 아키텍처를 전문으로 합니다.',
   },
   skills: {
     title: '기술 스택',
