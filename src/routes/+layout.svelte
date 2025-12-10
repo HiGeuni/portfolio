@@ -21,7 +21,7 @@
   import msIcon144 from '$lib/assets/favicon/ms-icon-144x144.png';
   import manifest from '$lib/assets/favicon/manifest.json?url';
 
-  import ogImage from '$lib/assets/op-image.png';
+  import ogImage from '$lib/assets/og-image.png';
 
   let { children } = $props();
 </script>
@@ -55,13 +55,14 @@
   <meta property="og:url" content={$page.url.href} />
   <meta property="og:title" content={t.seo.ogTitle} />
   <meta property="og:description" content={t.seo.ogDescription} />
-  <meta property="og:image" content={ogImage} />
+  <meta property="og:image" content={new URL(ogImage, $page.url.origin).href} />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:url" content={$page.url.href} />
   <meta property="twitter:title" content={t.seo.ogTitle} />
   <meta property="twitter:description" content={t.seo.ogDescription} />
+  <meta property="twitter:image" content={new URL(ogImage, $page.url.origin).href} />
   <!-- <meta property="twitter:image" content="" /> -->
 </svelte:head>
 
