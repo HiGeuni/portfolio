@@ -73,7 +73,7 @@ export const en = {
     p3: 'Beyond coding, I am passionate about creating type-safe ecosystems using tools like **Directus CMS** and integrating secure payment flows with **Stripe**. I thrive in environments where technical excellence meets user-centric design.',
     cards: {
       perf: {
-        title: 'Performance Obsessed',
+        title: 'Performance Centered',
         desc: 'Expert in bundle optimization, code splitting, and dynamic imports to ensure maximum speed.',
       },
       scale: {
