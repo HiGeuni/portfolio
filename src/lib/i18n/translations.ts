@@ -19,6 +19,15 @@ import kumoLogo from '$lib/assets/projects/screenshots/kumo/logo.png';
 import kumoApplicationDeploy from '$lib/assets/projects/screenshots/kumo/application-deploy.jpg';
 import kumoEnvironmentBranch from '$lib/assets/projects/screenshots/kumo/environment-branch.jpg';
 import kumoOptionChange from '$lib/assets/projects/screenshots/kumo/optionChange.gif';
+import heartyFridgeMain from '$lib/assets/projects/screenshots/hearty-fridge/main.png';
+import heartyFridgeDonateForm from '$lib/assets/projects/screenshots/hearty-fridge/food-donate-form.png';
+import heartyFridgeReserveForm from '$lib/assets/projects/screenshots/hearty-fridge/food-reserve-form.png';
+import heartyFridgeLocation from '$lib/assets/projects/screenshots/hearty-fridge/location-visualization-and-fridge-info.png';
+import heartyFridgeMyPage from '$lib/assets/projects/screenshots/hearty-fridge/my-page.png';
+import sihyunhadaCrm from '$lib/assets/projects/screenshots/sihuynhada/crm.png';
+import sihyunhadaPhoto from '$lib/assets/projects/screenshots/sihuynhada/after-take-photo.png';
+import webGiftMain from '$lib/assets/projects/screenshots/web-gift/main.png';
+import webGiftOrder from '$lib/assets/projects/screenshots/web-gift/order.png';
 
 export const en = {
   nav: {
@@ -33,63 +42,64 @@ export const en = {
   seo: {
     title: 'HyoGeun Kim | Frontend Engineer',
     description:
-      'Portfolio of HyoGeun Kim, a Frontend Engineer specializing in Web Performance Optimization and FSD Architecture.',
+      'Frontend Engineer with 2+ years of hands-on experience. I focus on web performance, FSD architecture, and building products that actually work well for users.',
     keywords:
       'Frontend Engineer, Web Performance, FSD Architecture, React, Next.js, SvelteKit, Portfolio',
     ogTitle: 'HyoGeun Kim | Frontend Engineer',
     ogDescription:
-      'Check out my portfolio and projects. Specializing in Web Performance Optimization and FSD Architecture.',
+      'Frontend engineer who cares about performance and clean architecture. Check out what I have been building.',
   },
   skills: {
     title: 'Technical Skills',
-    description: 'Technologies I work with to bring ideas to life.',
+    description: 'Tools and technologies I use day-to-day.',
     categories: {
       frontend: 'Frontend Core',
       styling: 'Styling & UI',
       state: 'State & Data',
+      formsAndTables: 'Forms & Tables',
       infra: 'Infrastructure & Tools',
       integration: 'Integrations',
     },
   },
   hero: {
-    available: 'Available for new opportunities',
+    available: 'Open to new opportunities',
     greeting: "Hi, I'm",
     name: 'HyoGeun Kim',
     role: ['Frontend Engineer', 'Software Engineer'],
     description:
-      'Specializing in **Web Performance Optimization**, **FSD Architecture**, and building scalable **SaaS Platforms**. I transform complex problems into elegant, high-performance web solutions.',
+      'I build fast, well-structured web applications. Most recently, I took a site from **Lighthouse 52 to 87** as a solo frontend engineer, and I have a habit of building things from scratch when libraries fall short -- like a **custom SVG infinite canvas** with raw DOM manipulation.',
     viewProjects: 'View Projects',
     downloadResume: 'Download Resume',
     yearsExp: 'Years Exp',
     perfBoost: 'Perf Boost',
     architecture: 'Architecture',
     evaluatorIntro:
-      'A 1.5-year Frontend Engineer who maximizes business value through FSD architecture and performance optimization, prioritizing user experience.',
+      'A frontend engineer who has shipped production apps solo, obsesses over Core Web Vitals, and designs systems that scale with FSD architecture.',
   },
   about: {
     title: 'About Me',
-    p1: 'I am a **Frontend Engineer** with 1.5 years of experience, specializing in web performance optimization, scalable architecture, and seamless system integrations.',
-    p2: 'My expertise lies in building large-scale applications using **Feature-Sliced Design (FSD)** and optimizing bundle sizes for lightning-fast user experiences. I have a proven track record of reducing load times by nearly 50% and handling complex data visualizations.',
-    p3: 'Beyond coding, I am passionate about creating type-safe ecosystems using tools like **Directus CMS** and integrating secure payment flows with **Stripe**. I thrive in environments where technical excellence meets user-centric design.',
+    p1: "I'm a **Frontend Engineer** with 2+ years of experience, mostly as the sole frontend developer on small teams. I have been responsible for everything from performance optimization and architecture decisions to payment integrations and CMS builds.",
+    p2: "At AwareLab, I inherited a site scoring **Lighthouse 52** with a 9-second LCP. I brought it to 87 by cutting the bundle 46% with dynamic imports, subsetting fonts from 800KB to 250KB, and fixing race conditions in financial chart rendering. Before that, I studied **Computer Graphics** as an undergrad researcher (published at CIA 2023) and competed in **ACM-ICPC** regionals -- which is where I picked up the habit of thinking about problems systematically.",
+    p3: "These days I'm focused on **FSD architecture** for organizing large codebases, **Stripe** and **Directus** integrations with full type safety, and building custom editors with **TipTap**. I like working on products where I can own the frontend end-to-end and make real impact on user experience.",
     cards: {
       perf: {
-        title: 'Performance Centered',
-        desc: 'Expert in bundle optimization, code splitting, and dynamic imports to ensure maximum speed.',
+        title: 'Performance First',
+        desc: 'Took Lighthouse from 52 to 87. Bundle analysis, code splitting, font subsetting, fixing CLS -- whatever it takes to make the site fast.',
       },
       scale: {
         title: 'Scalable Architecture',
-        desc: 'Building maintainable, large-scale applications using Feature-Sliced Design (FSD) principles.',
+        desc: 'I use Feature-Sliced Design (FSD) to keep large codebases organized and maintainable as they grow.',
       },
       system: {
         title: 'System Integration',
-        desc: 'Seamlessly integrating Stripe payments and Headless CMS (Directus) with type safety.',
+        desc: 'Stripe payments, Directus CMS, 3-language i18n -- I wire up complex systems with type safety so things stay reliable.',
       },
     },
   },
   contact: {
     title: "Let's Connect",
     description:
-      "I'm currently available for freelance work or full-time positions. If you have a project that needs some creative touch, or just want to say hi, feel free to drop me a message.",
+      "I'm open to full-time roles or interesting contract work. If you are looking for a frontend engineer who can own the entire frontend independently, I'd love to hear from you.",
     info: {
       email: 'Email',
       phone: 'Phone',
@@ -115,61 +125,68 @@ export const en = {
   },
   career: {
     title: 'Experience',
-    description: 'My professional journey and key achievements.',
+    description: 'Where I have worked and what I built there.',
     jobs: [
       {
         company: 'AwareLab',
         role: 'Frontend Engineer',
         period: '2025.04 - Present',
         description:
-          'Building a high-performance membership platform for investment portfolio analysis.',
+          'Solo frontend engineer on an investment portfolio analysis platform. The team went from 6 to 4 devs, and I became the only frontend engineer after my colleague was let go.',
         achievements: [
-          'Optimized bundle size by 46% (253KB → 136KB) through code splitting and dynamic imports.',
-          'Implemented Feature-Sliced Design (FSD) architecture for scalable development.',
-          'Integrated Stripe payments and Directus CMS with full type safety.',
-          'Solved complex chart rendering issues with Lightweight Charts.',
+          'Improved Core Web Vitals: LCP 9s to 3.8s (60% reduction), CLS 0.126 to 0, Lighthouse 52 to 87.',
+          'Cut bundle size 46% (253KB to 136KB) using @next/bundle-analyzer to find the worst offenders, then applied code splitting and dynamic imports.',
+          'Set up Feature-Sliced Design (FSD) architecture to keep the growing codebase manageable.',
+          'Built an Admin Dashboard with Zustand Factory pattern for reusable filter stores, RBAC, and TanStack Table.',
+          'Developed a TipTap CMS editor with 12 custom extensions including SlashCommand, Paywall blocks, and Stock chart embeds.',
+          'Fixed race conditions in financial chart rendering -- closures were capturing stale data, solved it with closure scoping + Map-based caching + gsap.context().revert().',
+          'Integrated Stripe (membership, period selection, coupon, payment flow) and Directus CMS with shared types between FE and BE.',
+          'Implemented 3-language support (EN/KO/JA) with next-intl, including hreflang tags for SEO.',
         ],
       },
       {
         company: 'Daqda',
         role: 'Frontend Engineer',
         period: '2024.06 - 2025.03',
-        description: 'Developed location visualization services and e-commerce platforms.',
+        description:
+          'Solo frontend developer on a 3-person dev team (CTO, backend, me). Built and migrated products for funeral-related services at a 30-person company.',
         achievements: [
-          "Built 'The Prestige', a funeral home location service using Kakao Map API.",
-          'Improved UX by implementing tab-based filtering and Image CDN with Lazy Loading.',
-          'Developed a web gift mall using React, Vite, and Zustand.',
-          'Implemented robust data persistence using LocalStorage to prevent data loss.',
+          'Migrated The Prestige from legacy ASP.NET to Next.js (8 pages in 6 weeks). The old site had full page refreshes on every filter change -- I rebuilt it as a SPA with real-time filtering. Alpha testers said it was a much better experience.',
+          'Set up Vercel CI/CD to replace the old manual deployment process (deploy time went from 10 min to 2 min). Previously had to hand off build files because I had no access to the Windows Server.',
+          'Worked with the backend developer to design clean API response structures.',
+          'Built a gift e-commerce site with Vite+React (chose it over Next.js since there was no SEO need). Used LocalStorage persistence to stop users from losing order data when switching between the site and their contacts app for recipient info -- this directly reduced phone-order fallback CS calls.',
         ],
       },
       {
         company: 'SW Maestro',
         role: 'Frontend Engineer',
         period: '2023.04 - 2023.11',
-        description: 'Selected as a trainee for the prestigious software talent nurturing program.',
+        description:
+          'Selected for the 14th cohort of SW Maestro, a government software talent program.',
         achievements: [
-          "Developed 'Kumo Factory', a No-Code Cloud Deployment platform.",
-          'Built a Drag & Drop UI for designing cloud infrastructure.',
-          'Implemented real-time deployment logs using Server-Sent Events (SSE).',
-          'Optimized UX with SSR (Server-Side Rendering) in Next.js 13.',
+          "Built 'Kumo Factory', a no-code cloud deployment platform where you design infrastructure visually on a canvas.",
+          'Started with react-zoom-pan-pinch but hit canvas size limitations for large architectures. Ended up building a custom infinite canvas with pure SVG DOM manipulation and 3x3 affine transformation matrices. The hardest part was getting pixel calculations right at different zoom levels.',
+          'Achieved 60fps rendering and 30% memory reduction through data normalization and Zustand selective subscribing.',
+          'Reduced unnecessary API calls by 50%+ with a 3-layer state architecture (domain/UI/server).',
+          'Implemented real-time deployment logs using Server-Sent Events (SSE) with <100ms latency.',
         ],
       },
       {
         company: 'GDSC Seoultech',
         role: 'Frontend Developer',
         period: '2022.09 - 2023.04',
-        description: 'Core member of Google Developer Student Clubs.',
+        description: 'Core member of Google Developer Student Clubs at Seoul National University of Science & Technology.',
         achievements: [
-          'Developed a Shared Fridge Service using Next.js 12 and React Query.',
-          'Implemented optimistic updates for seamless user interaction.',
-          'Built interactive map pages and donation forms.',
+          'Built a shared fridge service for food donations using Next.js 13 and Recoil.',
+          'Integrated Google Maps API for finding and visualizing fridge locations.',
+          'Learned and implemented Optimistic Updates here -- a pattern I later used in production at Daqda.',
         ],
       },
     ],
   },
   projects: {
     title: 'Featured Projects',
-    description: 'A selection of my recent work.',
+    description: 'Things I have built.',
     showFeatured: 'Show Featured Only',
     viewCaseStudy: 'View Case Study',
     modal: {
@@ -206,25 +223,38 @@ export const en = {
           },
         ],
         image: 'bg-gradient-to-br from-green-400 to-emerald-600',
-        role: 'Lead Frontend Engineer',
-        description: 'Investment portfolio analysis platform with high-performance charts.',
+        role: 'Solo Frontend Engineer',
+        description:
+          'Investment portfolio analysis platform with financial charts, Stripe-powered memberships, and 3-language support. I handle all frontend work as the sole FE engineer.',
         problem:
-          'Users needed a fast, reliable platform for complex investment data analysis with real-time updates.',
+          'The platform launched with serious performance issues -- Lighthouse 52, LCP over 9 seconds. Users were waiting too long to see their investment data, and the initial bundle was bloated.',
         solution:
-          'Built a high-performance web app using Next.js 16 and FSD architecture, integrating Stripe for payments and Directus for content.',
+          'Rebuilt the frontend architecture with FSD, optimized Core Web Vitals through bundle analysis and code splitting, and integrated Stripe for subscriptions and Directus as the headless CMS -- all with shared TypeScript types between FE and BE.',
         challenges:
-          'Optimizing large JS bundles and handling complex chart rendering. Solved by code splitting (46% load improvement) and dynamic imports.',
-        tech: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS', 'Stripe', 'Directus'],
+          'Financial charts had race conditions where closures captured stale data during re-renders. Fixed it with closure scoping + Map-based caching + gsap.context().revert(). Cut the bundle 46% (253KB to 136KB) after finding the biggest offenders with @next/bundle-analyzer. Reduced font files from 800KB to 250KB through subsetting, which eliminated CLS.',
+        tech: [
+          'Next.js 16',
+          'React 19',
+          'TypeScript',
+          'Tailwind CSS',
+          'Stripe',
+          'Directus',
+          'GSAP',
+          'next-intl',
+        ],
         features: [
-          'Real-time Charts',
+          'Real-time Financial Charts',
           'Stripe Subscription',
           'Portfolio Analysis',
           'FSD Architecture',
+          '3-Language Support (EN/KO/JA)',
+          'Core Web Vitals Optimization',
         ],
         impact: [
-          'Bundle size reduced 253KB → 136KB',
-          '46% faster initial load',
-          'Seamless payment integration',
+          'Lighthouse 52 → 87 (+67%)',
+          'LCP 9s → 3.8s (60% faster)',
+          'Bundle size 253KB → 136KB (46% reduction)',
+          'CLS 0.126 → 0 (eliminated)',
         ],
         links: { demo: 'https://awarelab.io', github: '#' },
       },
@@ -241,16 +271,27 @@ export const en = {
           { src: prestigeBookmark, caption: 'Bookmark page' },
         ],
         image: 'bg-gradient-to-br from-emerald-500 to-teal-700',
-        role: 'Frontend Engineer',
-        description: 'Funeral home location visualization service with map integration.',
-        problem: 'Users found it difficult to find and filter funeral home locations efficiently.',
+        role: 'Solo Frontend Engineer',
+        description:
+          'Funeral home location and comparison service. Migrated the entire frontend from legacy ASP.NET to Next.js in 6 weeks, ahead of a demo for Yonsei Severance Hospital.',
+        problem:
+          'The existing ASP.NET site was a multi-page app that did a full page refresh every time you changed a filter. Each filter step required navigating to a new page. Deployments were manual on a Windows Server, taking 10+ minutes, and I did not even have server access -- I had to hand off build files.',
         solution:
-          'Implemented a map-based visualization with Kakao Map API and optimized image loading for a smooth experience.',
+          'Rebuilt all 8 pages in Next.js as a SPA with real-time client-side filtering using Kakao Map. Set up Vercel CI/CD so deployments went from 10 minutes manual to 2 minutes automatic. CSR conversion of the map and filter UI made a noticeable difference in responsiveness.',
         challenges:
-          'Managing heavy image assets and complex filter logic. Solved with Image CDN + Lazy Loading and refactoring filter UX.',
-        tech: ['Next.js', 'Vite', 'Recoil', 'Kakao Map API'],
-        features: ['Map Visualization', 'Location Filtering', 'Image Gallery', 'Tab-based UI'],
-        impact: ['Improved UX with tab-based filtering', 'Optimized image loading performance'],
+          'Had to finish the migration in 6 weeks to be ready for the Yonsei Severance demo. Maintained full feature parity with the legacy system while redesigning the filtering UX. Coordinated API response structure with the backend developer.',
+        tech: ['Next.js', 'React', 'TypeScript', 'Recoil', 'Kakao Map API', 'Vercel'],
+        features: [
+          'Map-based Location Visualization',
+          'Client-side SPA Filtering',
+          'Image CDN + Lazy Loading',
+          'Vercel CI/CD Pipeline',
+        ],
+        impact: [
+          'Legacy ASP.NET → Next.js (8 pages, 6 weeks)',
+          'Deployment 10 min → 2 min (80% faster)',
+          'Alpha testers reported much better filtering experience',
+        ],
         links: { demo: '#', github: '#' },
       },
       {
@@ -264,27 +305,299 @@ export const en = {
             src: kumoMain,
             caption: 'Intuitive Drag & Drop infrastructure designer',
           },
-          { src: kumoAbstract, caption: 'Real-time deployment logs via SSE' },
+          { src: kumoAbstract, caption: 'SVG canvas with cloud architecture' },
           {
             src: kumoApplicationDeploy,
-            caption: 'Real-time deployment logs via SSE',
+            caption: 'Application deployment configuration',
           },
-          { src: kumoOptionChange, caption: 'Real-time deployment logs via SSE' },
+          { src: kumoOptionChange, caption: 'Real-time option changes' },
           {
             src: kumoEnvironmentBranch,
-            caption: 'Real-time deployment logs via SSE',
+            caption: 'Environment and branch management',
           },
         ],
         image: 'bg-gradient-to-br from-teal-400 to-cyan-600',
-        role: 'Frontend Engineer',
-        description: 'No-Code Cloud Deployment Platform with Drag & Drop UI.',
-        problem: 'Cloud deployment is complex and intimidating for beginners.',
-        solution: 'Created a Drag & Drop interface for designing cloud infrastructure visually.',
+        role: 'Solo Frontend Engineer',
+        description:
+          'No-code cloud deployment platform where you design infrastructure visually on an infinite canvas. Built during SW Maestro 14th cohort.',
+        problem:
+          'Cloud deployment is intimidating for people who are not DevOps specialists. We wanted to let users visually design their cloud architecture by dragging and dropping components on a canvas, then deploy with one click.',
+        solution:
+          'Started with react-zoom-pan-pinch, but it could not handle large architectures due to canvas size limitations. Built a custom infinite canvas from scratch using pure SVG DOM manipulation and 3x3 affine transformation matrices for pan, zoom, and drag.',
         challenges:
-          'Visualizing deployment status in real-time. Solved using Server-Sent Events (SSE) for live logs.',
-        tech: ['Next.js 13', 'Tailwind CSS', 'Zustand', 'SSE'],
-        features: ['Drag & Drop UI', 'Real-time Logs (SSE)', 'Cloud Architecture Design'],
-        impact: ['Simplified cloud deployment process', 'SSR based UX optimization'],
+          'The hardest part was getting pixel calculations right at different zoom levels -- translating screen coordinates to canvas coordinates through the transformation matrix. Used data normalization and Zustand selective subscribing to hit 60fps with 30% less memory.',
+        tech: ['Next.js 13', 'React', 'TypeScript', 'Tailwind CSS', 'Zustand', 'SSE', 'SVG'],
+        features: [
+          'Custom SVG Infinite Canvas',
+          'Drag & Drop Cloud Architecture',
+          'Real-time Deployment Logs (SSE)',
+          '3-Layer State Architecture',
+        ],
+        impact: [
+          '60fps rendering performance',
+          '30% memory reduction via data normalization',
+          '50%+ reduction in unnecessary API calls',
+          'SSE latency <100ms',
+        ],
+        links: { demo: '#', github: '#' },
+      },
+      {
+        id: 4,
+        title: 'AwareLab Admin Dashboard',
+        category: 'Internal Tool',
+        imageUrl: awarelabLogo,
+        isFeatured: false,
+        gallery: [
+          { src: awarelabAdminHome, caption: 'Admin dashboard home' },
+          { src: awarelabAdminMemberDetail, caption: 'Member detail management' },
+        ],
+        image: 'bg-gradient-to-br from-green-500 to-emerald-700',
+        role: 'Solo Frontend Engineer',
+        description:
+          'Internal admin dashboard for managing members, subscriptions, and content. Built with a Zustand Factory pattern so filter logic is reusable across every data view.',
+        problem:
+          'The membership platform needed an admin tool for managing users, subscriptions, and articles -- with different permission levels for different team roles.',
+        solution:
+          'Built a dashboard using a Zustand Factory pattern that automatically generates domain-specific filter stores. Used TanStack Table for data grids and implemented RBAC for access control.',
+        challenges:
+          'Designed a Generic Filter Store Factory so we did not have to write separate filter logic for each domain (members, subscriptions, articles, etc.). Set up hierarchical React Query keys for scope-based cache invalidation.',
+        tech: [
+          'React',
+          'TypeScript',
+          'Vite',
+          'Zustand',
+          'TanStack Query',
+          'TanStack Table',
+          'Directus',
+          'MSW',
+          'Vitest',
+        ],
+        features: [
+          'Zustand Factory Pattern',
+          'RBAC Permission System',
+          'TanStack Table Data Grids',
+          'Auto Token Refresh',
+          'MSW API Testing',
+        ],
+        impact: [
+          'Generic filter store reusable across domains',
+          'Scope-based cache invalidation',
+          'API-independent testing with MSW',
+        ],
+        links: { demo: '#', github: '#' },
+      },
+      {
+        id: 5,
+        title: 'AwareLab CMS Editor',
+        category: 'Content Management',
+        imageUrl: awarelabLogo,
+        isFeatured: false,
+        gallery: [],
+        image: 'bg-gradient-to-br from-emerald-400 to-green-600',
+        role: 'Solo Frontend Engineer',
+        description:
+          'Custom rich text editor for writing investment analysis articles. Built on TipTap with 12 extensions, including SlashCommand for block insertion, Paywall markers, and Stock chart embeds.',
+        problem:
+          'The platform needed writers to create investment analysis articles with custom content blocks -- paywalled sections, embedded stock charts, and structured financial data -- that a standard WYSIWYG editor cannot handle.',
+        solution:
+          'Built a TipTap-based editor with 12 custom extensions. SlashCommand lets writers insert blocks by typing "/", Paywall marks where free content ends, and Stock embeds live financial data inline.',
+        challenges:
+          'Managing complex editor state was tricky -- validation getters check content integrity, and the editor auto-generates API payloads from its internal state. Implemented Dirty Tracking so users get warned about unsaved changes.',
+        tech: ['React', 'TypeScript', 'Vite', 'TipTap', 'Zustand', 'Directus'],
+        features: [
+          '12 Custom TipTap Extensions',
+          'SlashCommand Block Selection',
+          'Paywall Content Marking',
+          'Stock Chart Embedding',
+          'Dirty Tracking',
+        ],
+        impact: [
+          '12 custom extensions for domain-specific editing',
+          'Auto-generated API payloads from editor state',
+          'Reliable change detection with Dirty Tracking',
+        ],
+        links: { demo: '#', github: '#' },
+      },
+      {
+        id: 6,
+        title: 'Gift E-commerce',
+        category: 'E-commerce',
+        imageUrl: webGiftMain,
+        isFeatured: false,
+        gallery: [
+          { src: webGiftMain, caption: 'Gift e-commerce main page' },
+          { src: webGiftOrder, caption: 'Multi-step order flow' },
+        ],
+        image: 'bg-gradient-to-br from-amber-400 to-orange-600',
+        role: 'Solo Frontend Engineer',
+        description:
+          'Funeral gift ordering site. Chose Vite+React over Next.js since SEO was not needed. The key problem I solved was users losing order data when they switched to their contacts app to look up recipient info.',
+        problem:
+          'Users were abandoning the web order form mid-way because they had to switch to their phone contacts to look up recipient information. When they came back, their data was gone -- so they would call in a phone order instead, creating CS overhead.',
+        solution:
+          'Built a 6-step order flow (Product, Shipping, Sender, Recipient, Address, Payment) with Zustand + Immer for state management and LocalStorage persistence. Users can leave and come back without losing anything.',
+        challenges:
+          'Had to persist deeply nested order state across 6 steps while handling edge cases like back navigation and browser refreshes. Added search parameter auto-fill for returning users coming from marketing links.',
+        tech: ['React', 'TypeScript', 'Vite', 'Zustand', 'Immer'],
+        features: [
+          '6-Step Order Flow',
+          'LocalStorage Persistence',
+          'Search Parameter Auto-fill',
+          'Complex State Management',
+        ],
+        impact: [
+          'Eliminated data loss during multi-step ordering',
+          'Reduced phone order CS calls by keeping users on the web flow',
+        ],
+        links: { demo: '#', github: '#' },
+      },
+      {
+        id: 7,
+        title: 'Sihyunhada Admin',
+        category: 'Admin Dashboard',
+        imageUrl: sihyunhadaCrm,
+        isFeatured: false,
+        gallery: [
+          { src: sihyunhadaCrm, caption: 'Photobooth CRM dashboard' },
+          { src: sihyunhadaPhoto, caption: 'Photo capture management' },
+        ],
+        image: 'bg-gradient-to-br from-pink-400 to-rose-600',
+        role: 'Solo Frontend Engineer',
+        description:
+          'Admin dashboard for a photobooth franchise. 15+ pages with 4-stage cascading filters and data export to Excel, print, and clipboard.',
+        problem:
+          'A photobooth franchise network needed to manage devices across a hierarchy: Franchise, Group, Branch, Device. Operations staff needed to filter data at each level and export it in multiple formats.',
+        solution:
+          'Built a 4-stage cascading filter where each level narrows down based on the previous selection. Data export supports Excel (Blob download), print (react-to-print), and clipboard (Clipboard API).',
+        challenges:
+          'The cascading filter logic was the tricky part -- each dropdown depends on the previous selection, and the whole chain needs to reset correctly. Created a generic DataType<T> pattern to handle form metadata consistently across 15+ pages.',
+        tech: [
+          'React 18',
+          'TypeScript',
+          'Vite',
+          'Recoil',
+          'TanStack Query',
+          'react-hook-form',
+          'Zod',
+        ],
+        features: [
+          '4-Stage Cascading Filters',
+          'Excel/Print/Clipboard Export',
+          '15+ Management Pages',
+          'Zod Type-safe Forms',
+        ],
+        impact: [
+          'Efficient device management across franchise hierarchy',
+          'Multi-format data export for operations',
+        ],
+        links: { demo: '#', github: '#' },
+      },
+      {
+        id: 8,
+        title: 'Panmun Admin/Account',
+        category: 'Monorepo Platform',
+        imageUrl: null,
+        isFeatured: false,
+        gallery: [],
+        image: 'bg-gradient-to-br from-violet-400 to-purple-600',
+        role: 'Solo Frontend Engineer',
+        description:
+          'Lerna monorepo with admin and account sites sharing a common package. Designed a React Query Service pattern that bundles everything related to a data entity into one object.',
+        problem:
+          'Two apps (admin and account) needed to share auth logic and UI components but deploy independently. Without a shared package, we were duplicating code and getting inconsistencies.',
+        solution:
+          'Set up a Lerna monorepo with 3 workspaces: admin-site, account-site, and shared. Created a React Query Service pattern where each entity bundles its queryKey, getCache, queryOptions, and prefetchQuery together.',
+        challenges:
+          'The React Query Service pattern was the main design challenge -- figuring out the right abstraction so that queryKey, cache access, and prefetching are all co-located per entity, making data fetching consistent across both apps.',
+        tech: ['React', 'TypeScript', 'Lerna', 'Recoil', 'TanStack Query'],
+        features: [
+          'Lerna Monorepo (3 Workspaces)',
+          'React Query Service Pattern',
+          'Shared Authentication',
+          'Independent Deployment',
+        ],
+        impact: [
+          'Code sharing across admin/account apps',
+          'Consistent API management with Service pattern',
+        ],
+        links: { demo: '#', github: '#' },
+      },
+      {
+        id: 9,
+        title: 'Kunstkammer',
+        category: 'Art Management',
+        imageUrl: null,
+        isFeatured: false,
+        gallery: [],
+        image: 'bg-gradient-to-br from-indigo-400 to-blue-600',
+        role: 'Frontend Engineer',
+        description:
+          'Art collection management system. Used openapi-typescript to auto-generate types from the Swagger schema, so API types were always in sync without manual maintenance.',
+        problem:
+          'Managing art collections required complex data grids, multi-image uploads with featured image selection, and API types that stay in sync with the backend without manual effort.',
+        solution:
+          'Used openapi-typescript to auto-generate TypeScript types from the OpenAPI schema. AG Grid Enterprise for the data tables. Storybook for documenting the component library.',
+        challenges:
+          'Built a multi-image upload system (max 10 images) where you can set a featured image and track deletions. The deletion tracking was managed with Recoil atoms so the UI stayed in sync with what needed to be sent to the API.',
+        tech: [
+          'React',
+          'TypeScript',
+          'SWR',
+          'openapi-typescript',
+          'AG Grid',
+          'Storybook',
+          'react-dropzone',
+        ],
+        features: [
+          'OpenAPI Auto-generated Types',
+          'AG Grid Enterprise',
+          'Multi-image Upload',
+          'Storybook Documentation',
+          'Custom Multi-select Dropdown',
+        ],
+        impact: [
+          'Type-safe API calls with zero manual type maintenance',
+          'Documented component library with Storybook',
+        ],
+        links: { demo: '#', github: '#' },
+      },
+      {
+        id: 10,
+        title: 'Hearty Fridge',
+        category: 'Social Good',
+        imageUrl: heartyFridgeMain,
+        isFeatured: false,
+        gallery: [
+          { src: heartyFridgeMain, caption: 'Main page with fridge listings' },
+          { src: heartyFridgeDonateForm, caption: 'Food donation form' },
+          { src: heartyFridgeReserveForm, caption: 'Food reservation form' },
+          {
+            src: heartyFridgeLocation,
+            caption: 'Location visualization and fridge info',
+          },
+          { src: heartyFridgeMyPage, caption: 'My page with donation history' },
+        ],
+        image: 'bg-gradient-to-br from-cyan-400 to-blue-600',
+        role: 'Frontend Developer',
+        description:
+          'A shared fridge service built with GDSC Seoultech for community food donations. This project is where I first learned Optimistic Updates -- a pattern I later used in production at Daqda. Also where I realized I needed TypeScript (this was pure JavaScript).',
+        problem:
+          'Communities needed a way to share surplus food through public refrigerators, with real-time tracking of what is available in each fridge.',
+        solution:
+          'Built a web app with Google Maps API for finding fridge locations, food donation/reservation flows, and optimistic update patterns so the UI responds instantly without waiting for the server.',
+        challenges:
+          'This was my starting point as a frontend developer. I learned Optimistic Updates here for the first time -- giving users instant UI feedback during food reservation and donation actions. This pattern became one of my go-to tools that I later applied in production at Daqda.',
+        tech: ['Next.js 13', 'JavaScript', 'Recoil', 'styled-components', 'Google Maps API'],
+        features: [
+          'Google Maps Integration',
+          'Food Donation/Reservation',
+          'Optimistic Updates',
+          'Location Visualization',
+        ],
+        impact: [
+          'Real-time fridge availability tracking',
+          'Optimistic update pattern reused in production',
+        ],
         links: { demo: '#', github: '#' },
       },
     ],
@@ -304,63 +617,64 @@ export const ko = {
   seo: {
     title: '김효근 | 프론트엔드 엔지니어',
     description:
-      '웹 성능 최적화와 FSD 아키텍처를 전문으로 하는 프론트엔드 엔지니어 김효근의 포트폴리오입니다.',
+      '2년 이상 실무 경험의 프론트엔드 엔지니어 김효근입니다. 웹 성능 최적화와 FSD 아키텍처, 사용자 경험 개선에 집중합니다.',
     keywords:
       '프론트엔드 엔지니어, 웹 성능 최적화, FSD 아키텍처, React, Next.js, SvelteKit, 포트폴리오',
     ogTitle: '김효근 | 프론트엔드 엔지니어',
     ogDescription:
-      '저의 포트폴리오와 프로젝트를 확인해보세요. 웹 성능 최적화와 FSD 아키텍처를 전문으로 합니다.',
+      '성능과 아키텍처에 진심인 프론트엔드 엔지니어입니다. 포트폴리오와 프로젝트를 확인해보세요.',
   },
   skills: {
     title: '기술 스택',
-    description: '아이디어를 현실로 구현하기 위해 사용하는 기술들입니다.',
+    description: '실무에서 매일 사용하는 기술들입니다.',
     categories: {
       frontend: '프론트엔드 코어',
       styling: '스타일링 & UI',
       state: '상태 관리 & 데이터',
+      formsAndTables: '폼 & 테이블',
       infra: '인프라 & 도구',
       integration: '외부 연동',
     },
   },
   hero: {
-    available: '새로운 도전을 기다리고 있습니다',
+    available: '새로운 기회를 찾고 있습니다',
     greeting: '안녕하세요, 저는',
     name: '김효근입니다',
     role: ['프론트엔드 엔지니어', '소프트웨어 엔지니어'],
     description:
-      '**웹 성능 최적화**와 **FSD 아키텍처** 설계를 전문으로 하며, 확장 가능한 **SaaS 플랫폼**을 구축합니다. 기술적 난제를 해결하여 사용자에게 **최적의 웹 경험**을 제공하는 데 집중합니다.',
+      '빠르고 구조가 탄탄한 웹 애플리케이션을 만듭니다. 최근에는 혼자서 **Lighthouse 52점짜리 사이트를 87점까지** 끌어올렸고, 라이브러리가 한계를 보이면 직접 만드는 편입니다 -- 순수 DOM 조작으로 **커스텀 SVG 무한 캔버스**를 구현한 적도 있습니다.',
     viewProjects: '프로젝트 보기',
     downloadResume: '이력서 다운로드',
     yearsExp: '년차',
     perfBoost: '성능 개선',
     architecture: '아키텍처',
     evaluatorIntro:
-      '사용자 경험을 최우선으로, FSD 아키텍처와 성능 최적화를 통해 비즈니스 가치를 극대화하는 1.5년차 프론트엔드 엔지니어입니다.',
+      '솔로 프론트엔드로 프로덕션 서비스를 직접 구축해온 엔지니어. Core Web Vitals에 집착하고, FSD 아키텍처로 확장 가능한 구조를 설계합니다.',
   },
   about: {
     title: '소개',
-    p1: '저는 1.5년 경력의 **프론트엔드 엔지니어**로, 웹 성능 최적화, 확장 가능한 아키텍처, 그리고 원활한 시스템 통합을 전문으로 합니다.',
-    p2: '**Feature-Sliced Design (FSD)**을 사용하여 대규모 애플리케이션을 구축하고 번들 크기를 최적화하여 매우 빠른 사용자 경험을 제공하는 데 전문성이 있습니다. 로딩 시간을 거의 50% 단축하고 복잡한 데이터 시각화를 처리한 실적이 있습니다.',
-    p3: '코딩 외에도 **Directus CMS**와 같은 도구를 사용하여 타입 안전한 생태계를 만들고 **Stripe**로 안전한 결제 흐름을 통합하는 데 열정적입니다. 기술적 우수성과 사용자 중심 디자인이 만나는 환경에서 성장합니다.',
+    p1: '2년 이상 경력의 **프론트엔드 엔지니어**입니다. 대부분 소규모 팀에서 유일한 프론트엔드 개발자로 일해왔고, 성능 최적화부터 아키텍처 설계, 결제 연동, CMS 구축까지 프론트엔드 전반을 맡아왔습니다.',
+    p2: 'AwareLab에서는 **Lighthouse 52점**, LCP 9초짜리 사이트를 넘겨받았습니다. @next/bundle-analyzer로 번들을 46% 줄이고, 폰트를 800KB에서 250KB로 서브셋팅하고, 금융 차트의 Race Condition을 잡아서 87점까지 올렸습니다. 그 전에는 서울과학기술대학교에서 **컴퓨터 그래픽스 연구실** 학부 연구생으로 CIA 2023에 1저자 논문을 게재했고, **ACM-ICPC** 서울 리저널에 진출했습니다. 문제를 체계적으로 분석하는 습관은 거기서 시작됐습니다.',
+    p3: '요즘은 대규모 코드베이스를 정리하기 위한 **FSD 아키텍처**, **Stripe**와 **Directus**의 타입 안전한 통합, **TipTap** 기반 커스텀 에디터 개발에 관심이 많습니다. 프론트엔드를 처음부터 끝까지 주도하면서 사용자 경험에 실질적인 영향을 줄 수 있는 환경을 좋아합니다.',
     cards: {
       perf: {
-        title: '성능 집착',
-        desc: '최대 속도를 보장하기 위한 번들 최적화, 코드 분할 및 동적 가져오기 전문가.',
+        title: '성능에 진심',
+        desc: 'Lighthouse 52에서 87까지. 번들 분석, 코드 스플리팅, 폰트 서브셋팅, CLS 제거 -- 사이트를 빠르게 만들기 위해 필요한 건 다 합니다.',
       },
       scale: {
         title: '확장 가능한 아키텍처',
-        desc: 'Feature-Sliced Design (FSD) 원칙을 사용하여 유지 관리 가능한 대규모 애플리케이션 구축.',
+        desc: 'Feature-Sliced Design(FSD)을 활용해서 코드베이스가 커져도 구조가 무너지지 않게 관리합니다.',
       },
       system: {
         title: '시스템 통합',
-        desc: 'Stripe 결제 및 Headless CMS (Directus)를 타입 안전성과 함께 원활하게 통합.',
+        desc: 'Stripe 결제, Directus CMS, 3개국어 i18n -- 복잡한 외부 시스템을 타입 안전하게 연동해서 안정성을 확보합니다.',
       },
     },
   },
   contact: {
     title: '연락하기',
     description:
-      '현재 프리랜서 또는 정규직 제안을 받고 있습니다. 창의적인 손길이 필요한 프로젝트가 있거나, 단순히 인사를 나누고 싶다면 언제든 메시지를 보내주세요.',
+      '정규직이나 흥미로운 프로젝트에 열려 있습니다. 프론트엔드를 독립적으로 맡길 수 있는 엔지니어를 찾고 계시다면, 편하게 연락 주세요.',
     info: {
       email: '이메일',
       phone: '전화번호',
@@ -386,60 +700,67 @@ export const ko = {
   },
   career: {
     title: '경력',
-    description: '저의 전문적인 여정과 주요 성과들입니다.',
+    description: '어디서 무엇을 만들어왔는지.',
     jobs: [
       {
         company: 'AwareLab',
         role: '프론트엔드 엔지니어',
         period: '2025.04 - 현재',
-        description: '투자 포트폴리오 분석을 위한 고성능 멤버십 플랫폼 구축.',
+        description:
+          '투자 포트폴리오 분석 멤버십 플랫폼의 프론트엔드를 혼자 담당하고 있습니다. 팀이 6명에서 4명으로 줄면서 FE 동료가 퇴사한 후, 플랫폼 FE 전체를 맡게 됐습니다.',
         achievements: [
-          '코드 분할 및 동적 가져오기를 통해 번들 크기 46% 최적화 (253KB → 136KB).',
-          '확장 가능한 개발을 위한 Feature-Sliced Design (FSD) 아키텍처 구현.',
-          '완전한 타입 안전성을 갖춘 Stripe 결제 및 Directus CMS 통합.',
-          'Lightweight Charts를 활용하여 복잡한 차트 렌더링 문제 해결.',
+          'Core Web Vitals 개선: LCP 9초 → 3.8초(60% 단축), CLS 0.126 → 0, Lighthouse 52 → 87.',
+          '@next/bundle-analyzer로 가장 큰 원인을 찾아내고, 코드 스플리팅과 동적 임포트로 번들 46% 감소(253KB → 136KB).',
+          '코드베이스가 커져도 관리 가능하도록 Feature-Sliced Design(FSD) 아키텍처 도입.',
+          '도메인별 재사용 가능한 Zustand Factory 패턴, RBAC, TanStack Table 기반 Admin 대시보드 구축.',
+          'SlashCommand, Paywall, Stock 차트 임베드 등 12개 커스텀 확장이 포함된 TipTap CMS 에디터 개발.',
+          '금융 차트 렌더링 Race Condition 해결 -- 클로저가 stale 데이터를 캡처하는 문제를 closure 스코핑 + Map 기반 캐싱 + gsap.context().revert()로 수정.',
+          'Stripe(멤버십, 기간 선택, 쿠폰, 결제) 및 Directus CMS 연동. FE/BE 간 Directus 모델 기반 타입 공유.',
+          'next-intl 기반 3개국어(EN/KO/JA) 지원 및 hreflang SEO 구현.',
         ],
       },
       {
         company: 'Daqda',
         role: '프론트엔드 엔지니어',
         period: '2024.06 - 2025.03',
-        description: '위치 시각화 서비스 및 이커머스 플랫폼 개발.',
+        description:
+          '3인 개발팀(CTO, 백엔드, 저)에서 프론트엔드를 혼자 담당했습니다. 30인 규모 장례 관련 서비스 회사에서 제품을 만들고 레거시를 마이그레이션했습니다.',
         achievements: [
-          "Kakao Map API를 활용한 장례식장 위치 서비스 'The Prestige' 구축.",
-          '탭 기반 필터링 및 Lazy Loading이 적용된 Image CDN을 구현하여 UX 개선.',
-          'React, Vite, Zustand를 사용하여 웹 기프트 몰 개발.',
-          '데이터 손실 방지를 위해 LocalStorage를 활용한 강력한 데이터 지속성 구현.',
+          'The Prestige를 레거시 ASP.NET에서 Next.js로 전체 마이그레이션(8페이지, 6주). 기존 사이트는 필터 변경마다 풀 페이지 리프레시 -- SPA로 재구축해서 실시간 필터링 구현. 연세 세브란스 데모 전에 완성. 알파 테스터들의 반응: "훨씬 좋아졌다".',
+          '기존 수동 배포(Windows Server에 빌드 파일 전달, 서버 접근 권한도 없었음)를 Vercel CI/CD로 전환. 배포 시간 10분 → 2분.',
+          '백엔드 개발자와 함께 깔끔한 API 응답 구조 설계.',
+          'Gift E-commerce를 Vite+React로 개발(SEO 불필요해서 Next.js 대신 선택). LocalStorage로 주문 데이터를 유지해서, 사용자가 수신인 정보를 확인하려고 연락처 앱에 갔다 와도 데이터가 날아가지 않도록 처리 -- 전화 주문 CS가 줄었습니다.',
         ],
       },
       {
         company: 'SW Maestro',
         role: '프론트엔드 엔지니어',
         period: '2023.04 - 2023.11',
-        description: '소프트웨어 인재 양성 프로그램 연수생으로 선발.',
+        description: 'SW Maestro 14기 연수생으로 선발.',
         achievements: [
-          "노코드 클라우드 배포 플랫폼 'Kumo Factory' 개발.",
-          '클라우드 인프라 설계를 위한 Drag & Drop UI 구축.',
-          'Server-Sent Events (SSE)를 사용하여 실시간 배포 로그 구현.',
-          'Next.js 13의 SSR(Server-Side Rendering)로 UX 최적화.',
+          "노코드 클라우드 배포 플랫폼 'Kumo Factory' 개발. 캔버스 위에서 인프라를 시각적으로 설계하는 서비스.",
+          'react-zoom-pan-pinch로 시작했지만 대규모 아키텍처에서 캔버스 크기 제한에 부딪혔습니다. 결국 순수 SVG DOM 조작 + 3x3 아핀 변환 행렬로 커스텀 무한 캔버스를 직접 구현. 가장 어려웠던 건 줌 레벨마다 달라지는 픽셀 좌표 계산.',
+          '데이터 정규화와 Zustand 선택적 구독으로 60fps 렌더링, 메모리 30% 절감.',
+          '3계층 상태 아키텍처(도메인/UI/서버)로 불필요한 API 호출 50%+ 절감.',
+          'Server-Sent Events(SSE) 기반 실시간 배포 로그 구현(지연 100ms 미만).',
         ],
       },
       {
         company: 'GDSC Seoultech',
         role: '프론트엔드 개발자',
         period: '2022.09 - 2023.04',
-        description: 'Google Developer Student Clubs 핵심 멤버.',
+        description: 'Google Developer Student Clubs(서울과학기술대학교) 핵심 멤버.',
         achievements: [
-          'Next.js 12와 React Query를 사용하여 공유 냉장고 서비스 개발.',
-          '원활한 사용자 상호작용을 위해 낙관적 업데이트(Optimistic Updates) 구현.',
-          '대화형 지도 페이지 및 기부 양식 구축.',
+          'Next.js 13과 Recoil로 공유 냉장고(나눔 냉장고) 서비스 개발.',
+          'Google Maps API로 냉장고 위치 시각화 구현.',
+          'Optimistic Updates 패턴을 처음 배우고 적용한 프로젝트 -- 이후 Daqda 실무에서 재사용.',
         ],
       },
     ],
   },
   projects: {
     title: '주요 프로젝트',
-    description: '최근 진행한 주요 작업물입니다.',
+    description: '직접 만든 것들.',
     showFeatured: '주요 프로젝트만 보기',
     viewCaseStudy: '사례 연구 보기',
     modal: {
@@ -476,17 +797,39 @@ export const ko = {
           },
         ],
         image: 'bg-gradient-to-br from-green-400 to-emerald-600',
-        role: '리드 프론트엔드 엔지니어',
-        description: '고성능 차트를 활용한 투자 포트폴리오 분석 플랫폼.',
+        role: '프론트엔드 단독 개발',
+        description:
+          '투자 포트폴리오 분석 플랫폼. 금융 차트, Stripe 멤버십 결제, 3개국어 지원을 갖추고 있고, 유일한 FE 엔지니어로 프론트엔드 전체를 담당합니다.',
         problem:
-          '사용자들은 실시간 업데이트와 복잡한 투자 데이터 분석을 위한 빠르고 신뢰할 수 있는 플랫폼이 필요했습니다.',
+          '런칭 초기 심각한 성능 문제가 있었습니다. Lighthouse 52점, LCP 9초 이상. 사용자가 투자 데이터를 보기까지 너무 오래 기다려야 했고, 초기 번들이 비대했습니다.',
         solution:
-          'Next.js 16과 FSD 아키텍처를 사용하여 고성능 웹 앱을 구축하고, Stripe 결제 및 Directus 콘텐츠 관리를 통합했습니다.',
+          'FSD로 프론트엔드 아키텍처를 재설계하고, 번들 분석과 코드 스플리팅으로 Core Web Vitals를 최적화했습니다. Stripe 구독 결제와 Directus 헤드리스 CMS를 연동하면서 FE/BE 간 TypeScript 타입을 공유했습니다.',
         challenges:
-          '대용량 JS 번들 최적화 및 복잡한 차트 렌더링 처리. 코드 분할(46% 로딩 개선) 및 동적 가져오기로 해결했습니다.',
-        tech: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS', 'Stripe', 'Directus'],
-        features: ['실시간 차트', 'Stripe 구독', '포트폴리오 분석', 'FSD 아키텍처'],
-        impact: ['번들 크기 253KB → 136KB 감소', '초기 로딩 속도 46% 향상', '원활한 결제 통합'],
+          '금융 차트에서 클로저가 stale 데이터를 캡처하는 Race Condition이 발생. closure 스코핑 + Map 기반 캐싱 + gsap.context().revert()로 해결. @next/bundle-analyzer로 가장 큰 원인을 찾아 번들 46%(253KB → 136KB) 감소. 폰트 서브셋팅(800KB → 250KB)으로 CLS 제거.',
+        tech: [
+          'Next.js 16',
+          'React 19',
+          'TypeScript',
+          'Tailwind CSS',
+          'Stripe',
+          'Directus',
+          'GSAP',
+          'next-intl',
+        ],
+        features: [
+          '실시간 금융 차트',
+          'Stripe 구독 결제',
+          '포트폴리오 분석',
+          'FSD 아키텍처',
+          '3개국어 지원 (EN/KO/JA)',
+          'Core Web Vitals 최적화',
+        ],
+        impact: [
+          'Lighthouse 52 → 87 (+67%)',
+          'LCP 9초 → 3.8초 (60% 단축)',
+          '번들 크기 253KB → 136KB (46% 감소)',
+          'CLS 0.126 → 0 (완전 제거)',
+        ],
         links: { demo: 'https://awarelab.io', github: '#' },
       },
       {
@@ -502,16 +845,27 @@ export const ko = {
           { src: prestigeBookmark, caption: '즐겨찾기 페이지' },
         ],
         image: 'bg-gradient-to-br from-emerald-500 to-teal-700',
-        role: '프론트엔드 엔지니어',
-        description: '지도 연동 장례식장 위치 시각화 서비스.',
-        problem: '사용자들이 장례식장 위치를 효율적으로 찾고 필터링하는 데 어려움을 겪었습니다.',
+        role: '프론트엔드 단독 개발',
+        description:
+          '장례식장 위치 조회 및 비교 서비스. 연세 세브란스 병원 데모를 앞두고 레거시 ASP.NET에서 Next.js로 6주 만에 전체 마이그레이션.',
+        problem:
+          '기존 ASP.NET 사이트는 MPA로, 필터를 바꿀 때마다 페이지 전체가 리프레시됐습니다. 필터 단계마다 새 페이지로 이동해야 했고, 배포는 Windows Server에 수동으로 10분 이상 걸렸습니다. 서버 접근 권한조차 없어서 빌드 파일을 전달해야 했습니다.',
         solution:
-          'Kakao Map API를 활용한 지도 기반 시각화를 구현하고 이미지 로딩을 최적화하여 부드러운 경험을 제공했습니다.',
+          '8개 페이지를 Next.js SPA로 재구축. Kakao Map 연동과 클라이언트 사이드 실시간 필터링을 구현. Vercel CI/CD로 배포 자동화(10분 수동 → 2분 자동). 지도와 필터 UI의 CSR 전환이 UX 반응성을 확실히 개선했습니다.',
         challenges:
-          '무거운 이미지 자산 및 복잡한 필터 로직 관리. 이미지 CDN + Lazy Loading 및 필터 UX 리팩토링으로 해결했습니다.',
-        tech: ['Next.js', 'Vite', 'Recoil', 'Kakao Map API'],
-        features: ['지도 시각화', '위치 필터링', '이미지 갤러리', '탭 기반 UI'],
-        impact: ['탭 기반 필터링으로 UX 개선', '이미지 로딩 성능 최적화'],
+          '연세 세브란스 데모에 맞춰 6주 내 마이그레이션 완료. 레거시 시스템의 기능을 모두 유지하면서 필터링 UX를 재설계. 백엔드 개발자와 API 응답 구조를 함께 설계.',
+        tech: ['Next.js', 'React', 'TypeScript', 'Recoil', 'Kakao Map API', 'Vercel'],
+        features: [
+          '지도 기반 위치 시각화',
+          '클라이언트 사이드 SPA 필터링',
+          'Image CDN + Lazy Loading',
+          'Vercel CI/CD 파이프라인',
+        ],
+        impact: [
+          '레거시 ASP.NET → Next.js (8페이지, 6주)',
+          '배포 시간 10분 → 2분 (80% 단축)',
+          '알파 테스터들의 반응: 필터링 경험이 훨씬 좋아짐',
+        ],
         links: { demo: '#', github: '#' },
       },
       {
@@ -525,28 +879,299 @@ export const ko = {
             src: kumoMain,
             caption: '직관적인 드래그 앤 드롭 인프라 설계',
           },
-          { src: kumoAbstract, caption: 'SSE를 통한 실시간 배포 로그' },
+          { src: kumoAbstract, caption: 'SVG 캔버스 클라우드 아키텍처' },
           {
             src: kumoApplicationDeploy,
-            caption: 'SSE를 통한 실시간 배포 로그',
+            caption: '애플리케이션 배포 설정',
           },
-          { src: kumoOptionChange, caption: 'SSE를 통한 실시간 배포 로그' },
+          { src: kumoOptionChange, caption: '실시간 옵션 변경' },
           {
             src: kumoEnvironmentBranch,
-            caption: 'SSE를 통한 실시간 배포 로그',
+            caption: '환경 및 브랜치 관리',
           },
         ],
         image: 'bg-gradient-to-br from-teal-400 to-cyan-600',
-        role: '프론트엔드 엔지니어',
-        description: '드래그 앤 드롭 UI를 갖춘 노코드 클라우드 배포 플랫폼.',
-        problem: '클라우드 배포는 초보자에게 복잡하고 어렵습니다.',
+        role: '프론트엔드 단독 개발',
+        description:
+          '무한 캔버스 위에서 클라우드 인프라를 시각적으로 설계하는 노코드 배포 플랫폼. SW Maestro 14기에서 개발.',
+        problem:
+          '클라우드 배포는 DevOps 전문가가 아닌 사람에게는 진입 장벽이 높습니다. 캔버스에 컴포넌트를 드래그 앤 드롭으로 배치하고, 원클릭으로 배포할 수 있게 만들고 싶었습니다.',
         solution:
-          '클라우드 인프라를 시각적으로 설계할 수 있는 드래그 앤 드롭 인터페이스를 만들었습니다.',
+          'react-zoom-pan-pinch로 시작했지만 대규모 아키텍처에서 캔버스 크기 제한에 부딪혔습니다. 순수 SVG DOM 조작과 3x3 아핀 변환 행렬로 커스텀 무한 캔버스를 직접 구현했습니다.',
         challenges:
-          '실시간 배포 상태 시각화. 실시간 로그를 위해 Server-Sent Events (SSE)를 사용하여 해결했습니다.',
-        tech: ['Next.js 13', 'Tailwind CSS', 'Zustand', 'SSE'],
-        features: ['드래그 앤 드롭 UI', '실시간 로그 (SSE)', '클라우드 아키텍처 설계'],
-        impact: ['클라우드 배포 프로세스 간소화', 'SSR 기반 UX 최적화'],
+          '가장 어려웠던 건 줌 레벨마다 달라지는 픽셀 좌표 계산 -- 화면 좌표를 변환 행렬을 통해 캔버스 좌표로 정확히 변환하는 것. 데이터 정규화와 Zustand 선택적 구독으로 60fps를 달성하면서 메모리를 30% 줄였습니다.',
+        tech: ['Next.js 13', 'React', 'TypeScript', 'Tailwind CSS', 'Zustand', 'SSE', 'SVG'],
+        features: [
+          '커스텀 SVG 무한 캔버스',
+          '드래그 앤 드롭 클라우드 아키텍처',
+          '실시간 배포 로그 (SSE)',
+          '3계층 상태 아키텍처',
+        ],
+        impact: [
+          '60fps 렌더링 성능',
+          '데이터 정규화로 30% 메모리 감소',
+          '불필요한 API 호출 50%+ 절감',
+          'SSE 지연 <100ms',
+        ],
+        links: { demo: '#', github: '#' },
+      },
+      {
+        id: 4,
+        title: 'AwareLab Admin Dashboard',
+        category: '내부 도구',
+        imageUrl: awarelabLogo,
+        isFeatured: false,
+        gallery: [
+          { src: awarelabAdminHome, caption: '관리자 대시보드 홈' },
+          { src: awarelabAdminMemberDetail, caption: '회원 상세 관리' },
+        ],
+        image: 'bg-gradient-to-br from-green-500 to-emerald-700',
+        role: '프론트엔드 단독 개발',
+        description:
+          '회원, 구독, 콘텐츠 관리를 위한 내부 관리자 대시보드. Zustand Factory 패턴으로 필터 로직을 모든 데이터 뷰에서 재사용할 수 있게 설계했습니다.',
+        problem:
+          '멤버십 플랫폼에 사용자, 구독, 아티클 관리 기능이 필요했고, 팀 역할별로 다른 권한 레벨이 요구됐습니다.',
+        solution:
+          '도메인별 필터 스토어를 자동 생성하는 Zustand Factory 패턴으로 대시보드를 구축. TanStack Table로 데이터 그리드, RBAC로 접근 제어를 구현했습니다.',
+        challenges:
+          'Generic Filter Store Factory를 설계해서 도메인마다(회원, 구독, 아티클 등) 별도의 필터 로직을 작성하지 않아도 되게 만들었습니다. 범위 기반 캐시 무효화를 위한 계층적 React Query 키 시스템도 구축.',
+        tech: [
+          'React',
+          'TypeScript',
+          'Vite',
+          'Zustand',
+          'TanStack Query',
+          'TanStack Table',
+          'Directus',
+          'MSW',
+          'Vitest',
+        ],
+        features: [
+          'Zustand Factory 패턴',
+          'RBAC 권한 시스템',
+          'TanStack Table 데이터 그리드',
+          '자동 토큰 갱신',
+          'MSW API 테스트',
+        ],
+        impact: [
+          '도메인 간 재사용 가능한 범용 필터 스토어',
+          '범위 기반 캐시 무효화',
+          'MSW를 활용한 API 독립적 테스트',
+        ],
+        links: { demo: '#', github: '#' },
+      },
+      {
+        id: 5,
+        title: 'AwareLab CMS Editor',
+        category: '콘텐츠 관리',
+        imageUrl: awarelabLogo,
+        isFeatured: false,
+        gallery: [],
+        image: 'bg-gradient-to-br from-emerald-400 to-green-600',
+        role: '프론트엔드 단독 개발',
+        description:
+          '투자 분석 글 작성을 위한 커스텀 리치 텍스트 에디터. TipTap 기반으로 SlashCommand, Paywall, Stock 차트 임베드 등 12개 확장 기능을 갖추고 있습니다.',
+        problem:
+          '투자 분석 아티클에 페이월 구간, 주식 차트 임베드, 구조화된 금융 데이터 같은 커스텀 콘텐츠 블록이 필요한데, 일반적인 WYSIWYG 에디터로는 처리가 안 됐습니다.',
+        solution:
+          'TipTap 기반 에디터에 12개 커스텀 확장을 구축. "/" 입력으로 블록을 삽입하는 SlashCommand, 무료 콘텐츠 경계를 표시하는 Paywall, 실시간 금융 데이터를 인라인으로 보여주는 Stock 등.',
+        challenges:
+          '에디터 상태 관리가 까다로웠습니다 -- 검증 getter로 콘텐츠 무결성을 체크하고, 에디터 내부 상태에서 API 페이로드를 자동 생성하는 구조. 미저장 변경 감지를 위한 Dirty Tracking도 구현.',
+        tech: ['React', 'TypeScript', 'Vite', 'TipTap', 'Zustand', 'Directus'],
+        features: [
+          '12개 커스텀 TipTap 확장',
+          'SlashCommand 블록 선택',
+          'Paywall 콘텐츠 표시',
+          'Stock 차트 임베딩',
+          'Dirty Tracking',
+        ],
+        impact: [
+          '도메인 특화 편집을 위한 12개 커스텀 확장',
+          '에디터 상태에서 자동 생성되는 API 페이로드',
+          'Dirty Tracking으로 안정적인 변경 감지',
+        ],
+        links: { demo: '#', github: '#' },
+      },
+      {
+        id: 6,
+        title: 'Gift E-commerce',
+        category: '이커머스',
+        imageUrl: webGiftMain,
+        isFeatured: false,
+        gallery: [
+          { src: webGiftMain, caption: '답례품 이커머스 메인 페이지' },
+          { src: webGiftOrder, caption: '다단계 주문 플로우' },
+        ],
+        image: 'bg-gradient-to-br from-amber-400 to-orange-600',
+        role: '프론트엔드 단독 개발',
+        description:
+          '장례 답례품 주문 사이트. SEO가 필요 없어서 Next.js 대신 Vite+React를 선택. 핵심 문제는 사용자가 수신인 정보를 확인하려고 연락처 앱에 갔다 오면 주문 데이터가 날아가는 것이었습니다.',
+        problem:
+          '사용자가 웹에서 주문을 하다가 수신인 정보를 확인하려고 연락처 앱으로 전환하면 돌아왔을 때 입력 데이터가 사라졌습니다. 결국 전화 주문으로 돌아가면서 CS 부담이 생겼습니다.',
+        solution:
+          'Zustand + Immer 상태 관리와 LocalStorage 영속성을 갖춘 6단계 주문 플로우(상품, 배송, 보내는 분, 받는 분, 주소, 결제). 사이트를 떠났다 돌아와도 데이터가 유지됩니다.',
+        challenges:
+          '6단계에 걸친 깊게 중첩된 주문 상태를 유지하면서, 뒤로가기나 브라우저 새로고침 같은 엣지 케이스를 처리. 마케팅 링크에서 유입되는 재방문 사용자를 위한 검색 파라미터 자동 채우기도 추가.',
+        tech: ['React', 'TypeScript', 'Vite', 'Zustand', 'Immer'],
+        features: [
+          '6단계 주문 플로우',
+          'LocalStorage 영속성',
+          '검색 파라미터 자동 채우기',
+          '복잡한 상태 관리',
+        ],
+        impact: [
+          '다단계 주문 중 데이터 손실 제거',
+          '웹 주문 유지로 전화 주문 CS 감소',
+        ],
+        links: { demo: '#', github: '#' },
+      },
+      {
+        id: 7,
+        title: 'Sihyunhada Admin',
+        category: '관리자 대시보드',
+        imageUrl: sihyunhadaCrm,
+        isFeatured: false,
+        gallery: [
+          { src: sihyunhadaCrm, caption: '포토부스 CRM 대시보드' },
+          { src: sihyunhadaPhoto, caption: '사진 촬영 관리' },
+        ],
+        image: 'bg-gradient-to-br from-pink-400 to-rose-600',
+        role: '프론트엔드 단독 개발',
+        description:
+          '포토부스 프랜차이즈 관리 대시보드. 15개 이상의 페이지에 4단계 캐스케이딩 필터와 Excel, 인쇄, 클립보드 데이터 내보내기 기능.',
+        problem:
+          '프랜차이즈 네트워크 전반의 포토부스 디바이스를 관리하려면 프랜차이즈-그룹-지점-디바이스 계층 구조에 맞는 필터링과 다양한 형식의 데이터 내보내기가 필요했습니다.',
+        solution:
+          '이전 선택에 따라 다음 레벨이 좁혀지는 4단계 캐스케이딩 필터 구축. 데이터 내보내기는 Excel(Blob 다운로드), 인쇄(react-to-print), 클립보드(Clipboard API) 지원.',
+        challenges:
+          '캐스케이딩 필터 로직이 까다로웠습니다 -- 각 드롭다운이 이전 선택에 의존하고, 체인 전체가 올바르게 리셋돼야 합니다. 15개 이상의 페이지에서 폼 메타데이터를 일관되게 다루기 위한 Generic DataType<T> 패턴도 설계.',
+        tech: [
+          'React 18',
+          'TypeScript',
+          'Vite',
+          'Recoil',
+          'TanStack Query',
+          'react-hook-form',
+          'Zod',
+        ],
+        features: [
+          '4단계 캐스케이딩 필터',
+          'Excel/인쇄/클립보드 내보내기',
+          '15개+ 관리 페이지',
+          'Zod 타입 안전 폼',
+        ],
+        impact: [
+          '프랜차이즈 계층 전반의 효율적 디바이스 관리',
+          '운영을 위한 다중 형식 데이터 내보내기',
+        ],
+        links: { demo: '#', github: '#' },
+      },
+      {
+        id: 8,
+        title: 'Panmun Admin/Account',
+        category: '모노레포 플랫폼',
+        imageUrl: null,
+        isFeatured: false,
+        gallery: [],
+        image: 'bg-gradient-to-br from-violet-400 to-purple-600',
+        role: '프론트엔드 단독 개발',
+        description:
+          'Lerna 모노레포 기반 관리자/계정 사이트. 데이터 엔티티 관련 로직을 하나의 객체로 묶는 React Query Service 패턴을 설계했습니다.',
+        problem:
+          '두 앱(관리자, 계정)이 인증 로직과 UI 컴포넌트를 공유하면서도 독립 배포가 필요했습니다. 공유 패키지 없이는 코드 중복과 불일치가 생겼습니다.',
+        solution:
+          '3개 워크스페이스(admin-site, account-site, shared)의 Lerna 모노레포를 구축. 각 엔티티의 queryKey, getCache, queryOptions, prefetchQuery를 하나로 묶는 React Query Service 패턴을 만들었습니다.',
+        challenges:
+          'React Query Service 패턴 설계가 핵심 과제 -- queryKey, 캐시 접근, 프리페칭을 엔티티별로 같은 위치에 두는 적절한 추상화를 찾아서, 두 앱에서 데이터 페칭이 일관되게 동작하도록 했습니다.',
+        tech: ['React', 'TypeScript', 'Lerna', 'Recoil', 'TanStack Query'],
+        features: [
+          'Lerna 모노레포 (3 워크스페이스)',
+          'React Query Service 패턴',
+          '공유 인증',
+          '독립 배포',
+        ],
+        impact: [
+          '관리자/계정 앱 간 코드 공유',
+          'Service 패턴으로 일관된 API 관리',
+        ],
+        links: { demo: '#', github: '#' },
+      },
+      {
+        id: 9,
+        title: 'Kunstkammer',
+        category: '미술품 관리',
+        imageUrl: null,
+        isFeatured: false,
+        gallery: [],
+        image: 'bg-gradient-to-br from-indigo-400 to-blue-600',
+        role: '프론트엔드 개발자',
+        description:
+          '미술품 컬렉션 관리 시스템. openapi-typescript로 Swagger 스키마에서 타입을 자동 생성해서, 수동 타입 관리 없이 API 타입이 항상 동기화됩니다.',
+        problem:
+          '미술품 관리에 복잡한 데이터 그리드, 다중 이미지 업로드(대표 이미지 선택 포함), 백엔드와 수동 작업 없이 동기화되는 API 타입이 필요했습니다.',
+        solution:
+          'openapi-typescript로 OpenAPI 스키마에서 TypeScript 타입을 자동 생성. AG Grid Enterprise로 데이터 테이블, Storybook으로 컴포넌트 라이브러리 문서화.',
+        challenges:
+          '다중 이미지 업로드 시스템(최대 10개)에서 대표 이미지 설정과 삭제 추적을 구현. 삭제 추적은 Recoil atom으로 관리해서 UI와 API에 보낼 데이터가 항상 동기화되도록 했습니다.',
+        tech: [
+          'React',
+          'TypeScript',
+          'SWR',
+          'openapi-typescript',
+          'AG Grid',
+          'Storybook',
+          'react-dropzone',
+        ],
+        features: [
+          'OpenAPI 자동 생성 타입',
+          'AG Grid Enterprise',
+          '다중 이미지 업로드',
+          'Storybook 문서화',
+          '커스텀 다중 선택 드롭다운',
+        ],
+        impact: [
+          '수동 타입 유지보수 없는 타입 안전 API 호출',
+          'Storybook을 통한 문서화된 컴포넌트 라이브러리',
+        ],
+        links: { demo: '#', github: '#' },
+      },
+      {
+        id: 10,
+        title: 'Hearty Fridge',
+        category: '사회 공헌',
+        imageUrl: heartyFridgeMain,
+        isFeatured: false,
+        gallery: [
+          { src: heartyFridgeMain, caption: '냉장고 목록 메인 페이지' },
+          { src: heartyFridgeDonateForm, caption: '음식 기부 양식' },
+          { src: heartyFridgeReserveForm, caption: '음식 예약 양식' },
+          {
+            src: heartyFridgeLocation,
+            caption: '위치 시각화 및 냉장고 정보',
+          },
+          { src: heartyFridgeMyPage, caption: '기부 내역 마이페이지' },
+        ],
+        image: 'bg-gradient-to-br from-cyan-400 to-blue-600',
+        role: '프론트엔드 개발자',
+        description:
+          'GDSC Seoultech에서 만든 지역사회 음식 나눔 서비스. Optimistic Updates를 처음 배운 프로젝트이고, 이후 Daqda 실무에서 재사용했습니다. 순수 JavaScript로 만들었는데, 이 프로젝트 이후 TypeScript로 전환했습니다.',
+        problem:
+          '지역 사회에서 공용 냉장고를 통해 잉여 식품을 나누고, 각 냉장고에 뭐가 있는지 실시간으로 확인할 수 있어야 했습니다.',
+        solution:
+          'Google Maps API로 냉장고 위치를 찾고, 음식 기부/예약 플로우를 만들고, Optimistic Updates 패턴으로 서버 응답을 기다리지 않고 UI가 즉시 반응하도록 구현했습니다.',
+        challenges:
+          '프론트엔드 개발의 시작점이었던 프로젝트입니다. 여기서 Optimistic Updates를 처음 배웠습니다 -- 음식 예약/기부 시 즉각적인 UI 피드백을 주는 패턴. 이후 Daqda 실무에서 즐겨 쓰는 패턴이 됐습니다.',
+        tech: ['Next.js 13', 'JavaScript', 'Recoil', 'styled-components', 'Google Maps API'],
+        features: [
+          'Google Maps 연동',
+          '음식 기부/예약',
+          'Optimistic Updates',
+          '위치 시각화',
+        ],
+        impact: [
+          '실시간 냉장고 가용성 추적',
+          'Optimistic Updates 패턴 프로덕션 재사용',
+        ],
         links: { demo: '#', github: '#' },
       },
     ],

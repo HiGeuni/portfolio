@@ -158,13 +158,13 @@
         let:motion
       >
         <div use:motion class="mb-16 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <button
+          <a
+            href="#projects"
             class="flex items-center gap-2 rounded-full bg-gray-900 px-8 py-4 font-medium text-white shadow-lg shadow-gray-900/20 transition-all hover:scale-105 hover:bg-gray-800"
-            onclick={() => scrollToSection('projects')}
           >
             {t.hero.viewProjects}
             <ArrowRight size={20} />
-          </button>
+          </a>
           <a
             href={`/resume_${locale.current}.pdf`}
             download
@@ -207,7 +207,7 @@
     <div class="container mx-auto px-6">
       <div class="flex flex-wrap justify-center gap-8 text-center md:gap-16">
         <div>
-          <div class="text-3xl font-bold text-gray-900">1.5+</div>
+          <div class="text-3xl font-bold text-gray-900">2+</div>
           <div class="text-sm font-medium tracking-wider text-gray-500 uppercase">
             {t.hero.yearsExp}
           </div>

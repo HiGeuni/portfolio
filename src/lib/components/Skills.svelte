@@ -7,23 +7,27 @@
   const skills = $derived([
     {
       category: t.skills.categories.frontend,
-      items: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3'],
+      items: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'SvelteKit', 'Vite'],
     },
     {
       category: t.skills.categories.styling,
-      items: ['Tailwind CSS', 'Emotion', 'Framer Motion', 'Shadcn UI'],
+      items: ['Tailwind CSS', 'GSAP', 'styled-components'],
     },
     {
       category: t.skills.categories.state,
-      items: ['Zustand', 'Recoil', 'React Query', 'SWR'],
+      items: ['Zustand', 'Recoil', 'TanStack Query', 'SWR', 'Immer'],
+    },
+    {
+      category: t.skills.categories.formsAndTables,
+      items: ['TanStack Table', 'react-hook-form', 'Zod', 'TipTap', 'AG Grid'],
     },
     {
       category: t.skills.categories.infra,
-      items: ['Git', 'GitHub Actions', 'Docker', 'Nginx', 'Vite'],
+      items: ['Git', 'Vercel', 'Vite', 'Storybook', 'Lerna', '@next/bundle-analyzer'],
     },
     {
       category: t.skills.categories.integration,
-      items: ['Stripe', 'Directus CMS', 'Kakao Map API', 'SSE'],
+      items: ['Stripe', 'Directus CMS', 'Kakao Map API', 'next-intl', 'SSE', 'MSW'],
     },
   ]);
 </script>

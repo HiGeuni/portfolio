@@ -1,5 +1,7 @@
 <script lang="ts">
   import './layout.css';
+  import { onMount } from 'svelte';
+  import 'prism-themes/themes/prism-one-dark.css'; // Add this line
   import favicon from '$lib/assets/favicon.svg';
   import CommandPalette from '$lib/components/CommandPalette.svelte';
   import { t } from '$lib/i18n';
@@ -22,6 +24,9 @@
   import manifest from '$lib/assets/favicon/manifest.json?url';
 
   import ogImage from '$lib/assets/og-image.png';
+
+  import Navigation from '$lib/components/Navigation.svelte';
+  import Footer from '$lib/components/Footer.svelte';
 
   let { children } = $props();
 </script>
@@ -66,5 +71,11 @@
   <!-- <meta property="twitter:image" content="" /> -->
 </svelte:head>
 
-<CommandPalette />
-{@render children()}
+<div class="min-h-screen bg-white selection:bg-green-100 selection:text-green-900">
+  <Navigation />
+  <CommandPalette />
+  <main>
+    {@render children()}
+  </main>
+  <Footer />
+</div>
