@@ -51,14 +51,5 @@
     "vitest": "^4.0.5",
     "vitest-browser-svelte": "^2.0.1"
   },
-  "dependencies": {
-    "@emailjs/browser": "^4.4.1",
-    "@types/canvas-confetti": "^1.9.0",
-    "canvas-confetti": "^1.9.4",
-    "clsx": "^2.1.1",
-    "lucide-svelte": "^0.554.0",
-    "svelte-inview": "^4.0.4",
-    "svelte-motion": "^0.12.2",
-    "tailwind-merge": "^3.4.0"
-  }
+  "dependencies": {}
 }

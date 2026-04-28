@@ -79,7 +79,7 @@ export const en = {
   about: {
     title: 'About Me',
     p1: "I'm a **Frontend Engineer** with 2+ years of experience, mostly as the sole frontend developer on small teams. I have been responsible for everything from performance optimization and architecture decisions to payment integrations and CMS builds.",
-    p2: "At AwareLab, I inherited a site scoring **Lighthouse 52** with a 9-second LCP. I brought it to 87 by cutting the bundle 46% with dynamic imports, subsetting fonts from 800KB to 250KB, and fixing race conditions in financial chart rendering. Before that, I studied **Computer Graphics** as an undergrad researcher (published at CIA 2023) and competed in **ACM-ICPC** regionals -- which is where I picked up the habit of thinking about problems systematically.",
+    p2: 'At AwareLab, I inherited a site scoring **Lighthouse 52** with a 9-second LCP. I brought it to 87 by cutting the bundle 46% with dynamic imports, subsetting fonts from 800KB to 250KB, and fixing race conditions in financial chart rendering. Before that, I studied **Computer Graphics** as an undergrad researcher (published at CIA 2023) and competed in **ACM-ICPC** regionals -- which is where I picked up the habit of thinking about problems systematically.',
     p3: "These days I'm focused on **FSD architecture** for organizing large codebases, **Stripe** and **Directus** integrations with full type safety, and building custom editors with **TipTap**. I like working on products where I can own the frontend end-to-end and make real impact on user experience.",
     cards: {
       perf: {
@@ -175,7 +175,8 @@ export const en = {
         company: 'GDSC Seoultech',
         role: 'Frontend Developer',
         period: '2022.09 - 2023.04',
-        description: 'Core member of Google Developer Student Clubs at Seoul National University of Science & Technology.',
+        description:
+          'Core member of Google Developer Student Clubs at Seoul National University of Science & Technology.',
         achievements: [
           'Built a shared fridge service for food donations using Next.js 13 and Recoil.',
           'Integrated Google Maps API for finding and visualizing fridge locations.',
@@ -222,7 +223,7 @@ export const en = {
             caption: 'Admin Member Detail Page',
           },
         ],
-        image: 'bg-gradient-to-br from-green-400 to-emerald-600',
+        image: 'bg-gradient-to-br from-gray-700 to-gray-900',
         role: 'Solo Frontend Engineer',
         description:
           'Investment portfolio analysis platform with financial charts, Stripe-powered memberships, and 3-language support. I handle all frontend work as the sole FE engineer.',
@@ -270,7 +271,7 @@ export const en = {
           { src: inquiry, caption: 'Inquiry page' },
           { src: prestigeBookmark, caption: 'Bookmark page' },
         ],
-        image: 'bg-gradient-to-br from-emerald-500 to-teal-700',
+        image: 'bg-gradient-to-br from-gray-700 to-gray-900',
         role: 'Solo Frontend Engineer',
         description:
           'Funeral home location and comparison service. Migrated the entire frontend from legacy ASP.NET to Next.js in 6 weeks, ahead of a demo for Yonsei Severance Hospital.',
@@ -316,7 +317,7 @@ export const en = {
             caption: 'Environment and branch management',
           },
         ],
-        image: 'bg-gradient-to-br from-teal-400 to-cyan-600',
+        image: 'bg-gradient-to-br from-gray-700 to-gray-900',
         role: 'Solo Frontend Engineer',
         description:
           'No-code cloud deployment platform where you design infrastructure visually on an infinite canvas. Built during SW Maestro 14th cohort.',
@@ -351,7 +352,7 @@ export const en = {
           { src: awarelabAdminHome, caption: 'Admin dashboard home' },
           { src: awarelabAdminMemberDetail, caption: 'Member detail management' },
         ],
-        image: 'bg-gradient-to-br from-green-500 to-emerald-700',
+        image: 'bg-gradient-to-br from-gray-700 to-gray-900',
         role: 'Solo Frontend Engineer',
         description:
           'Internal admin dashboard for managing members, subscriptions, and content. Built with a Zustand Factory pattern so filter logic is reusable across every data view.',
@@ -393,7 +394,7 @@ export const en = {
         imageUrl: awarelabLogo,
         isFeatured: false,
         gallery: [],
-        image: 'bg-gradient-to-br from-emerald-400 to-green-600',
+        image: 'bg-gradient-to-br from-gray-700 to-gray-900',
         role: 'Solo Frontend Engineer',
         description:
           'Custom rich text editor for writing investment analysis articles. Built on TipTap with 12 extensions, including SlashCommand for block insertion, Paywall markers, and Stock chart embeds.',
@@ -428,7 +429,7 @@ export const en = {
           { src: webGiftMain, caption: 'Gift e-commerce main page' },
           { src: webGiftOrder, caption: 'Multi-step order flow' },
         ],
-        image: 'bg-gradient-to-br from-amber-400 to-orange-600',
+        image: 'bg-gradient-to-br from-gray-700 to-gray-900',
         role: 'Solo Frontend Engineer',
         description:
           'Funeral gift ordering site. Chose Vite+React over Next.js since SEO was not needed. The key problem I solved was users losing order data when they switched to their contacts app to look up recipient info.',
@@ -461,7 +462,7 @@ export const en = {
           { src: sihyunhadaCrm, caption: 'Photobooth CRM dashboard' },
           { src: sihyunhadaPhoto, caption: 'Photo capture management' },
         ],
-        image: 'bg-gradient-to-br from-pink-400 to-rose-600',
+        image: 'bg-gradient-to-br from-gray-700 to-gray-900',
         role: 'Solo Frontend Engineer',
         description:
           'Admin dashboard for a photobooth franchise. 15+ pages with 4-stage cascading filters and data export to Excel, print, and clipboard.',
@@ -499,7 +500,7 @@ export const en = {
         imageUrl: null,
         isFeatured: false,
         gallery: [],
-        image: 'bg-gradient-to-br from-violet-400 to-purple-600',
+        image: 'bg-gradient-to-br from-gray-700 to-gray-900',
         role: 'Solo Frontend Engineer',
         description:
           'Lerna monorepo with admin and account sites sharing a common package. Designed a React Query Service pattern that bundles everything related to a data entity into one object.',
@@ -529,7 +530,7 @@ export const en = {
         imageUrl: null,
         isFeatured: false,
         gallery: [],
-        image: 'bg-gradient-to-br from-indigo-400 to-blue-600',
+        image: 'bg-gradient-to-br from-gray-700 to-gray-900',
         role: 'Frontend Engineer',
         description:
           'Art collection management system. Used openapi-typescript to auto-generate types from the Swagger schema, so API types were always in sync without manual maintenance.',
@@ -577,7 +578,7 @@ export const en = {
           },
           { src: heartyFridgeMyPage, caption: 'My page with donation history' },
         ],
-        image: 'bg-gradient-to-br from-cyan-400 to-blue-600',
+        image: 'bg-gradient-to-br from-gray-700 to-gray-900',
         role: 'Frontend Developer',
         description:
           'A shared fridge service built with GDSC Seoultech for community food donations. This project is where I first learned Optimistic Updates -- a pattern I later used in production at Daqda. Also where I realized I needed TypeScript (this was pure JavaScript).',
@@ -796,7 +797,7 @@ export const ko = {
             caption: '관리자 회원 상세 페이지',
           },
         ],
-        image: 'bg-gradient-to-br from-green-400 to-emerald-600',
+        image: 'bg-gradient-to-br from-gray-700 to-gray-900',
         role: '프론트엔드 단독 개발',
         description:
           '투자 포트폴리오 분석 플랫폼. 금융 차트, Stripe 멤버십 결제, 3개국어 지원을 갖추고 있고, 유일한 FE 엔지니어로 프론트엔드 전체를 담당합니다.',
@@ -844,7 +845,7 @@ export const ko = {
           { src: inquiry, caption: '문의 페이지' },
           { src: prestigeBookmark, caption: '즐겨찾기 페이지' },
         ],
-        image: 'bg-gradient-to-br from-emerald-500 to-teal-700',
+        image: 'bg-gradient-to-br from-gray-700 to-gray-900',
         role: '프론트엔드 단독 개발',
         description:
           '장례식장 위치 조회 및 비교 서비스. 연세 세브란스 병원 데모를 앞두고 레거시 ASP.NET에서 Next.js로 6주 만에 전체 마이그레이션.',
@@ -890,7 +891,7 @@ export const ko = {
             caption: '환경 및 브랜치 관리',
           },
         ],
-        image: 'bg-gradient-to-br from-teal-400 to-cyan-600',
+        image: 'bg-gradient-to-br from-gray-700 to-gray-900',
         role: '프론트엔드 단독 개발',
         description:
           '무한 캔버스 위에서 클라우드 인프라를 시각적으로 설계하는 노코드 배포 플랫폼. SW Maestro 14기에서 개발.',
@@ -925,7 +926,7 @@ export const ko = {
           { src: awarelabAdminHome, caption: '관리자 대시보드 홈' },
           { src: awarelabAdminMemberDetail, caption: '회원 상세 관리' },
         ],
-        image: 'bg-gradient-to-br from-green-500 to-emerald-700',
+        image: 'bg-gradient-to-br from-gray-700 to-gray-900',
         role: '프론트엔드 단독 개발',
         description:
           '회원, 구독, 콘텐츠 관리를 위한 내부 관리자 대시보드. Zustand Factory 패턴으로 필터 로직을 모든 데이터 뷰에서 재사용할 수 있게 설계했습니다.',
@@ -967,7 +968,7 @@ export const ko = {
         imageUrl: awarelabLogo,
         isFeatured: false,
         gallery: [],
-        image: 'bg-gradient-to-br from-emerald-400 to-green-600',
+        image: 'bg-gradient-to-br from-gray-700 to-gray-900',
         role: '프론트엔드 단독 개발',
         description:
           '투자 분석 글 작성을 위한 커스텀 리치 텍스트 에디터. TipTap 기반으로 SlashCommand, Paywall, Stock 차트 임베드 등 12개 확장 기능을 갖추고 있습니다.',
@@ -1002,7 +1003,7 @@ export const ko = {
           { src: webGiftMain, caption: '답례품 이커머스 메인 페이지' },
           { src: webGiftOrder, caption: '다단계 주문 플로우' },
         ],
-        image: 'bg-gradient-to-br from-amber-400 to-orange-600',
+        image: 'bg-gradient-to-br from-gray-700 to-gray-900',
         role: '프론트엔드 단독 개발',
         description:
           '장례 답례품 주문 사이트. SEO가 필요 없어서 Next.js 대신 Vite+React를 선택. 핵심 문제는 사용자가 수신인 정보를 확인하려고 연락처 앱에 갔다 오면 주문 데이터가 날아가는 것이었습니다.',
@@ -1019,10 +1020,7 @@ export const ko = {
           '검색 파라미터 자동 채우기',
           '복잡한 상태 관리',
         ],
-        impact: [
-          '다단계 주문 중 데이터 손실 제거',
-          '웹 주문 유지로 전화 주문 CS 감소',
-        ],
+        impact: ['다단계 주문 중 데이터 손실 제거', '웹 주문 유지로 전화 주문 CS 감소'],
         links: { demo: '#', github: '#' },
       },
       {
@@ -1035,7 +1033,7 @@ export const ko = {
           { src: sihyunhadaCrm, caption: '포토부스 CRM 대시보드' },
           { src: sihyunhadaPhoto, caption: '사진 촬영 관리' },
         ],
-        image: 'bg-gradient-to-br from-pink-400 to-rose-600',
+        image: 'bg-gradient-to-br from-gray-700 to-gray-900',
         role: '프론트엔드 단독 개발',
         description:
           '포토부스 프랜차이즈 관리 대시보드. 15개 이상의 페이지에 4단계 캐스케이딩 필터와 Excel, 인쇄, 클립보드 데이터 내보내기 기능.',
@@ -1073,7 +1071,7 @@ export const ko = {
         imageUrl: null,
         isFeatured: false,
         gallery: [],
-        image: 'bg-gradient-to-br from-violet-400 to-purple-600',
+        image: 'bg-gradient-to-br from-gray-700 to-gray-900',
         role: '프론트엔드 단독 개발',
         description:
           'Lerna 모노레포 기반 관리자/계정 사이트. 데이터 엔티티 관련 로직을 하나의 객체로 묶는 React Query Service 패턴을 설계했습니다.',
@@ -1090,10 +1088,7 @@ export const ko = {
           '공유 인증',
           '독립 배포',
         ],
-        impact: [
-          '관리자/계정 앱 간 코드 공유',
-          'Service 패턴으로 일관된 API 관리',
-        ],
+        impact: ['관리자/계정 앱 간 코드 공유', 'Service 패턴으로 일관된 API 관리'],
         links: { demo: '#', github: '#' },
       },
       {
@@ -1103,7 +1098,7 @@ export const ko = {
         imageUrl: null,
         isFeatured: false,
         gallery: [],
-        image: 'bg-gradient-to-br from-indigo-400 to-blue-600',
+        image: 'bg-gradient-to-br from-gray-700 to-gray-900',
         role: '프론트엔드 개발자',
         description:
           '미술품 컬렉션 관리 시스템. openapi-typescript로 Swagger 스키마에서 타입을 자동 생성해서, 수동 타입 관리 없이 API 타입이 항상 동기화됩니다.',
@@ -1151,7 +1146,7 @@ export const ko = {
           },
           { src: heartyFridgeMyPage, caption: '기부 내역 마이페이지' },
         ],
-        image: 'bg-gradient-to-br from-cyan-400 to-blue-600',
+        image: 'bg-gradient-to-br from-gray-700 to-gray-900',
         role: '프론트엔드 개발자',
         description:
           'GDSC Seoultech에서 만든 지역사회 음식 나눔 서비스. Optimistic Updates를 처음 배운 프로젝트이고, 이후 Daqda 실무에서 재사용했습니다. 순수 JavaScript로 만들었는데, 이 프로젝트 이후 TypeScript로 전환했습니다.',
@@ -1162,16 +1157,8 @@ export const ko = {
         challenges:
           '프론트엔드 개발의 시작점이었던 프로젝트입니다. 여기서 Optimistic Updates를 처음 배웠습니다 -- 음식 예약/기부 시 즉각적인 UI 피드백을 주는 패턴. 이후 Daqda 실무에서 즐겨 쓰는 패턴이 됐습니다.',
         tech: ['Next.js 13', 'JavaScript', 'Recoil', 'styled-components', 'Google Maps API'],
-        features: [
-          'Google Maps 연동',
-          '음식 기부/예약',
-          'Optimistic Updates',
-          '위치 시각화',
-        ],
-        impact: [
-          '실시간 냉장고 가용성 추적',
-          'Optimistic Updates 패턴 프로덕션 재사용',
-        ],
+        features: ['Google Maps 연동', '음식 기부/예약', 'Optimistic Updates', '위치 시각화'],
+        impact: ['실시간 냉장고 가용성 추적', 'Optimistic Updates 패턴 프로덕션 재사용'],
         links: { demo: '#', github: '#' },
       },
     ],

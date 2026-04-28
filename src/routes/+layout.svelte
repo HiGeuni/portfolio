@@ -1,12 +1,9 @@
 <script lang="ts">
   import './layout.css';
-  import { onMount } from 'svelte';
-  import 'prism-themes/themes/prism-one-dark.css'; // Add this line
-  import favicon from '$lib/assets/favicon.svg';
-  import CommandPalette from '$lib/components/CommandPalette.svelte';
-  import { t } from '$lib/i18n';
+  import 'prism-themes/themes/prism-one-dark.css';
   import { page } from '$app/stores';
 
+  import favicon from '$lib/assets/favicon.svg';
   import appleIcon57 from '$lib/assets/favicon/apple-icon-57x57.png';
   import appleIcon60 from '$lib/assets/favicon/apple-icon-60x60.png';
   import appleIcon72 from '$lib/assets/favicon/apple-icon-72x72.png';
@@ -22,13 +19,18 @@
   import favicon16 from '$lib/assets/favicon/favicon-16x16.png';
   import msIcon144 from '$lib/assets/favicon/ms-icon-144x144.png';
   import manifest from '$lib/assets/favicon/manifest.json?url';
-
   import ogImage from '$lib/assets/og-image.png';
 
-  import Navigation from '$lib/components/Navigation.svelte';
-  import Footer from '$lib/components/Footer.svelte';
+  import CursorFollower from '$lib/components/CursorFollower.svelte';
 
   let { children } = $props();
+
+  const seo = {
+    title: 'HyoGeun Kim | Frontend Engineer',
+    description: 'Frontend Engineer with 2+ years shipping React, Next.js, TypeScript at scale. Zero-to-one builder.',
+    ogTitle: 'HyoGeun Kim | Frontend Engineer',
+    ogDescription: 'Frontend engineer who builds from 0 to 1. Performance, canvas, architecture.',
+  };
 </script>
 
 <svelte:head>
@@ -47,35 +49,25 @@
   <link rel="icon" type="image/png" sizes="96x96" href={favicon96} />
   <link rel="icon" type="image/png" sizes="16x16" href={favicon16} />
   <link rel="manifest" href={manifest} />
-  <meta name="msapplication-TileColor" content="#ffffff" />
+  <meta name="msapplication-TileColor" content="#F2F0EA" />
   <meta name="msapplication-TileImage" content={msIcon144} />
-  <meta name="theme-color" content="#ffffff" />
+  <meta name="theme-color" content="#F2F0EA" />
 
-  <title>{t.seo.title}</title>
-  <meta name="description" content={t.seo.description} />
-  <meta name="keywords" content={t.seo.keywords} />
+  <title>{seo.title}</title>
+  <meta name="description" content={seo.description} />
 
-  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content={$page.url.href} />
-  <meta property="og:title" content={t.seo.ogTitle} />
-  <meta property="og:description" content={t.seo.ogDescription} />
+  <meta property="og:title" content={seo.ogTitle} />
+  <meta property="og:description" content={seo.ogDescription} />
   <meta property="og:image" content={new URL(ogImage, $page.url.origin).href} />
 
-  <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:url" content={$page.url.href} />
-  <meta property="twitter:title" content={t.seo.ogTitle} />
-  <meta property="twitter:description" content={t.seo.ogDescription} />
+  <meta property="twitter:title" content={seo.ogTitle} />
+  <meta property="twitter:description" content={seo.ogDescription} />
   <meta property="twitter:image" content={new URL(ogImage, $page.url.origin).href} />
-  <!-- <meta property="twitter:image" content="" /> -->
 </svelte:head>
 
-<div class="min-h-screen bg-white selection:bg-green-100 selection:text-green-900">
-  <Navigation />
-  <CommandPalette />
-  <main>
-    {@render children()}
-  </main>
-  <Footer />
-</div>
+<CursorFollower />
+{@render children()}
