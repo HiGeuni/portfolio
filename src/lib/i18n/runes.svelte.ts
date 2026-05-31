@@ -1,15 +1,10 @@
-import { en } from './translations';
-
-export const t = en;
+let _locale = $state<'en' | 'ko'>('ko');
 
 export const locale = {
   get current() {
-    return 'en';
-  },
-  set(value: string) {
-    // no-op
+    return _locale;
   },
   toggle() {
-    // no-op
+    _locale = _locale === 'ko' ? 'en' : 'ko';
   },
 };

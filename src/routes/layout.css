@@ -2,53 +2,51 @@
 @plugin '@tailwindcss/typography';
 
 :root {
-  --accent: #FFB454;
-  --ink: #0E0E0C;
-  --paper: #F2F0EA;
-  --grid-size: 80px;
-  --grid-opacity: 10;
-  --font-display: 'Inter Tight', 'Helvetica Neue', system-ui, sans-serif;
+  --bg: #0C0D10;
+  --surface: #15171C;
+  --surface-hi: #1E2128;
+  --text: #ECEEF2;
+  --dim: #7C828E;
+  --dimmer: #4E535D;
+  --line: #23252C;
+  --mint: #7FE9E1;
+  --gradient: linear-gradient(110deg, #7FE9E1 0%, #8FB8FF 45%, #C09BFF 100%);
+  --gradient-soft: linear-gradient(110deg, #7FE9E140 0%, #8FB8FF40 45%, #C09BFF40 100%);
+  --font-sans: 'Space Grotesk', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+  --font-serif: 'Spectral', 'Times New Roman', serif;
 }
 
 @theme {
-  --font-sans: 'Inter Tight', 'Helvetica Neue', system-ui, sans-serif;
+  --font-sans: 'Space Grotesk', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
 }
 
-*,
-*::before,
-*::after {
-  border-radius: 0 !important;
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
 }
 
 body {
-  font-family: var(--font-display);
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   word-break: keep-all;
-  margin: 0;
-  background: var(--paper);
-  color: var(--ink);
+  color: var(--text);
 }
+
+* { box-sizing: border-box; }
 
 /* Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--paper);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--ink);
-}
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #ffffff15; border-radius: 5px; }
 
 /* Selection */
 ::selection {
-  background: var(--accent);
-  color: var(--ink);
+  background: #7FE9E140;
+  color: var(--text);
 }
 
 /* Smooth Scrolling */
@@ -56,12 +54,11 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Ticker animation */
-@keyframes homeTicker {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-33.33%);
-  }
+/* Gradient text utility */
+.grad-text {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
 }

@@ -1,7 +1,7 @@
 <script lang="ts">
   import './layout.css';
-  import 'prism-themes/themes/prism-one-dark.css';
   import { page } from '$app/stores';
+  import { locale } from '$lib/i18n/runes.svelte';
 
   import favicon from '$lib/assets/favicon.svg';
   import appleIcon57 from '$lib/assets/favicon/apple-icon-57x57.png';
@@ -21,16 +21,21 @@
   import manifest from '$lib/assets/favicon/manifest.json?url';
   import ogImage from '$lib/assets/og-image.png';
 
-  import CursorFollower from '$lib/components/CursorFollower.svelte';
+  import Aurora from '$lib/components/Aurora.svelte';
 
   let { children } = $props();
 
-  const seo = {
+  const seo = $derived(locale.current === 'ko' ? {
+    title: '김효근 | 프론트엔드 엔지니어',
+    description: 'Measure. Define. Then build. 2년 이상 React, Next.js, TypeScript 실무 경험의 프론트엔드 엔지니어.',
+    ogTitle: '김효근 | 프론트엔드 엔지니어',
+    ogDescription: '측정 먼저, 정의 먼저. 성능, 캔버스, 아키텍처.',
+  } : {
     title: 'HyoGeun Kim | Frontend Engineer',
-    description: 'Frontend Engineer with 2+ years shipping React, Next.js, TypeScript at scale. Zero-to-one builder.',
+    description: 'Measure. Define. Then build. Frontend engineer with 2+ years shipping React, Next.js, TypeScript at scale.',
     ogTitle: 'HyoGeun Kim | Frontend Engineer',
-    ogDescription: 'Frontend engineer who builds from 0 to 1. Performance, canvas, architecture.',
-  };
+    ogDescription: 'Frontend engineer who measures before building. Performance, canvas, architecture.',
+  });
 </script>
 
 <svelte:head>
@@ -49,9 +54,9 @@
   <link rel="icon" type="image/png" sizes="96x96" href={favicon96} />
   <link rel="icon" type="image/png" sizes="16x16" href={favicon16} />
   <link rel="manifest" href={manifest} />
-  <meta name="msapplication-TileColor" content="#F2F0EA" />
+  <meta name="msapplication-TileColor" content="#0C0D10" />
   <meta name="msapplication-TileImage" content={msIcon144} />
-  <meta name="theme-color" content="#F2F0EA" />
+  <meta name="theme-color" content="#0C0D10" />
 
   <title>{seo.title}</title>
   <meta name="description" content={seo.description} />
@@ -69,5 +74,7 @@
   <meta property="twitter:image" content={new URL(ogImage, $page.url.origin).href} />
 </svelte:head>
 
-<CursorFollower />
-{@render children()}
+<Aurora />
+<div style="position: relative; z-index: 2;">
+  {@render children()}
+</div>

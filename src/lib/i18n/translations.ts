@@ -67,7 +67,7 @@ export const en = {
     name: 'HyoGeun Kim',
     role: ['Frontend Engineer', 'Software Engineer'],
     description:
-      'I build fast, well-structured web applications. Most recently, I took a site from **Lighthouse 52 to 87** as a solo frontend engineer, and I have a habit of building things from scratch when libraries fall short -- like a **custom SVG infinite canvas** with raw DOM manipulation.',
+      'Solo frontend engineer across two startups. Lighthouse 52 → 87, bundle −46%, 60fps infinite canvas. ACM-ICPC regionals, CIA 2023 first author.',
     viewProjects: 'View Projects',
     downloadResume: 'Download Resume',
     yearsExp: 'Years Exp',
@@ -130,7 +130,7 @@ export const en = {
       {
         company: 'AwareLab',
         role: 'Frontend Engineer',
-        period: '2025.04 - Present',
+        period: '2025.04 - 2026.03',
         description:
           'Solo frontend engineer on an investment portfolio analysis platform. The team went from 6 to 4 devs, and I became the only frontend engineer after my colleague was let go.',
         achievements: [
@@ -643,7 +643,7 @@ export const ko = {
     name: '김효근입니다',
     role: ['프론트엔드 엔지니어', '소프트웨어 엔지니어'],
     description:
-      '빠르고 구조가 탄탄한 웹 애플리케이션을 만듭니다. 최근에는 혼자서 **Lighthouse 52점짜리 사이트를 87점까지** 끌어올렸고, 라이브러리가 한계를 보이면 직접 만드는 편입니다 -- 순수 DOM 조작으로 **커스텀 SVG 무한 캔버스**를 구현한 적도 있습니다.',
+      '두 스타트업에서 프론트엔드를 혼자 책임졌습니다. Lighthouse 52 → 87, 번들 −46%, 60fps 무한 캔버스. ACM-ICPC 본선, CIA 2023 1저자.',
     viewProjects: '프로젝트 보기',
     downloadResume: '이력서 다운로드',
     yearsExp: '년차',
@@ -706,7 +706,7 @@ export const ko = {
       {
         company: 'AwareLab',
         role: '프론트엔드 엔지니어',
-        period: '2025.04 - 현재',
+        period: '2025.04 - 2026.03',
         description:
           '투자 포트폴리오 분석 멤버십 플랫폼의 프론트엔드를 혼자 담당하고 있습니다. 팀이 6명에서 4명으로 줄면서 FE 동료가 퇴사한 후, 플랫폼 FE 전체를 맡게 됐습니다.',
         achievements: [

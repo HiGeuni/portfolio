@@ -1,34 +1,36 @@
 <script lang="ts">
-  import { hexAlpha, pickReadableInk } from '$lib/utils/theme';
-  import BrutalistHeader from '$lib/components/BrutalistHeader.svelte';
+  import { caseKumoKo, caseKumoEn, caseAwarelabKo, caseAwarelabEn, casePrestigeKo, casePrestigeEn } from '$lib/data/cases';
+  import { blogPostsKo, blogPostsEn } from '$lib/data/blog';
+  import { locale } from '$lib/i18n/runes.svelte';
+  import Glass from '$lib/components/Glass.svelte';
+  import Nav from '$lib/components/Nav.svelte';
 
-  const accent = '#FFB454';
-  const ink = '#0E0E0C';
-  const paper = '#F2F0EA';
-  const gridOpacity = 10;
-  const gridSize = 80;
-  const onAccent = pickReadableInk(accent, ink, paper);
+  import ssMain from '$lib/assets/projects/screenshots/kumo/main.gif';
+  import ssAbstract from '$lib/assets/projects/screenshots/kumo/abstract.gif';
+  import ssOption from '$lib/assets/projects/screenshots/kumo/optionChange.gif';
+  import ssDeploy from '$lib/assets/projects/screenshots/kumo/application-deploy.jpg';
+  import ssBranch from '$lib/assets/projects/screenshots/kumo/environment-branch.jpg';
 
-  const metrics = [
-    { k: 'FRAMERATE', before: '', after: '60', delta: 'fps', note: 'Pan + zoom + drag' },
-    { k: 'MEMORY', before: '100%', after: '70%', delta: '−30%', note: 'After normalization' },
-    { k: 'API CALLS', before: '100%', after: '50%', delta: '−50%', note: 'Selective subscriptions' },
-    { k: 'SSE LATENCY', before: '', after: '<100ms', delta: 'live', note: 'Deploy → browser' },
+  const screenshots = [
+    { src: ssMain, alt: 'Kumo Main Canvas' },
+    { src: ssAbstract, alt: 'Abstract View' },
+    { src: ssOption, alt: 'Option Change' },
+    { src: ssDeploy, alt: 'Application Deploy' },
+    { src: ssBranch, alt: 'Environment Branch' },
   ];
 
-  const decisions = [
-    { n: '01', title: 'Throw out react-zoom-pan-pinch', body: '라이브러리는 캔버스 크기 제한이 있어 대규모 클라우드 아키텍처(노드 수백 개)를 한 화면에 담을 수 없었습니다. 직접 만들기로 결정.' },
-    { n: '02', title: 'SVG viewBox + 3×3 affine matrix', body: '캔버스 자체는 무한. viewBox 좌표를 이동·확대해서 화면에 비추는 창만 움직임. 모든 변환은 3×3 행렬로 합성·역변환.' },
-    { n: '03', title: 'Pointer-anchored zoom', body: '휠 줌은 마우스 포인터 기준으로 동작해야 자연스럽다. 비례 기반 좌표 재계산 — 포인터의 world position을 줌 전후 동일하게 유지.' },
-    { n: '04', title: 'Five Zustand slices', body: 'Common · Service · Area · Line · Option. 선택적 구독으로 변경된 slice 구독자만 리렌더. 정규화로 메모리 30% 절감.' },
-    { n: '05', title: 'SSE for live deploy', body: '배포 진행 상황을 100ms 이내에 브라우저로 푸시. 프론트엔드는 이벤트 스트림을 캔버스 노드 상태에 즉시 반영.' },
-  ];
+  const D = $derived(locale.current === 'ko' ? caseKumoKo : caseKumoEn);
+  const caseAwarelab = $derived(locale.current === 'ko' ? caseAwarelabKo : caseAwarelabEn);
+  const casePrestige = $derived(locale.current === 'ko' ? casePrestigeKo : casePrestigeEn);
+  const blogPosts = $derived(locale.current === 'ko' ? blogPostsKo : blogPostsEn);
+  const related = $derived(blogPosts.filter((p) => D.relatedPosts.includes(p.slug)));
 
+  /* ---- Interactive SVG canvas demo ---- */
   const nodes = [
     { x: 100, y: 100, label: 'VPC' },
     { x: 320, y: 100, label: 'ALB' },
-    { x: 560, y: 80, label: 'ECS · web' },
-    { x: 560, y: 200, label: 'ECS · api' },
+    { x: 560, y: 80, label: 'ECS \u00B7 web' },
+    { x: 560, y: 200, label: 'ECS \u00B7 api' },
     { x: 800, y: 140, label: 'RDS' },
     { x: 100, y: 320, label: 'S3' },
     { x: 320, y: 320, label: 'CloudFront' },
@@ -46,23 +48,6 @@
     [320, 352, 560, 412], [560, 412, 800, 392], [800, 392, 1040, 272],
   ];
 
-  const codeSnippet = `function zoomAtPointer(vb, factor, mouse, rect) {
-  // mouse: { x, y } in screen px; rect: bounding rect of <svg/>
-  const wx = (mouse.x / rect.width)  * vb.w + vb.x;
-  const wy = (mouse.y / rect.height) * vb.h + vb.y;
-
-  const nw = vb.w * factor;
-  const nh = vb.h * factor;
-
-  return {
-    x: wx - (wx - vb.x) * factor,
-    y: wy - (wy - vb.y) * factor,
-    w: nw,
-    h: nh,
-  };
-}`;
-
-  // Interactive canvas state — mirrors real Kumo Factory zoom/pan algorithm
   const VB_ORIGIN = { w: 800, h: 500 };
   const SCALE_MIN = 0.5;
   const SCALE_MAX = 5;
@@ -105,24 +90,20 @@
     e.preventDefault();
     if (!svgEl) return;
 
-    // 1. World point under cursor BEFORE scale change
     const pt = toWorld(e);
     const r = svgEl.getBoundingClientRect();
     const fx = (e.clientX - r.left) / r.width;
     const fy = (e.clientY - r.top) / r.height;
 
-    // 2. Continuous zoom proportional to scroll speed
     let delta = e.deltaY / 1000;
     if (e.deltaY !== 0 && Math.abs(delta) < 0.05) {
       delta = 0.05 * Math.sign(e.deltaY);
     }
     scale = Math.max(SCALE_MIN, Math.min(SCALE_MAX, scale + delta));
 
-    // 3. New viewBox dimensions
     const nw = VB_ORIGIN.w * scale;
     const nh = VB_ORIGIN.h * scale;
 
-    // 4. Anchor: reposition so the same world point stays under cursor
     vb = {
       x: pt.x - fx * nw,
       y: pt.y - fy * nh,
@@ -136,36 +117,71 @@
   <title>Kumo Factory — Case Study | HyoGeun Kim</title>
 </svelte:head>
 
-<div
-  class="page-root"
-  style="background-image: linear-gradient({ink}{hexAlpha(gridOpacity)} 1px, transparent 1px), linear-gradient(90deg, {ink}{hexAlpha(gridOpacity)} 1px, transparent 1px); background-size: {gridSize}px {gridSize}px;"
->
-  <BrutalistHeader variant="case" caseNumber={2} caseTotal={3} />
+<div class="case-page">
+  <Nav active="work" />
 
-  <!-- Title -->
+  <!-- 1. Title Section -->
   <section class="title-section">
-    <div class="title-meta">
-      <span class="shipped-badge" style="background: {accent}; color: {onAccent};">● SHIPPED 2023</span>
-      <span>KUMO FACTORY · NO-CODE CLOUD BUILDER</span>
-      <span>FRONTEND-OF-ONE</span>
-      <span>SVG · AFFINE · ZUSTAND · SSE</span>
+    <div class="meta-bar">
+      <a href="/projects" class="back-link">&larr; /projects</a>
+      <span class="grad-text shipped-badge">&bullet; shipped {D.year}</span>
+      <span>{D.role}</span>
+      <span>{D.stackBadge}</span>
     </div>
-    <h1 class="case-title">
-      <span style="background: {accent}; color: {onAccent}; padding: 0 8px;">Infinite</span> canvas.<br />
-      Sixty <span style="background: {accent}; color: {onAccent}; padding: 0 8px;">frames.</span>
-    </h1>
-    <div class="title-desc">
-      When the off-the-shelf zoom-pan library hit its size ceiling, I built one from scratch — viewBox + a 3×3 affine matrix.
-      The result is below: drag to pan, scroll to zoom. Mouse-anchored, 60fps.
-    </div>
+    <h1 class="title-h1">{D.label}</h1>
+    <p class="one-liner">{D.oneLiner}</p>
   </section>
 
-  <!-- Live Demo -->
+  <!-- 2. WHY Section -->
+  {#if D.why}
+    <section class="why-section">
+      <Glass>
+        <div class="why-grid">
+          <div class="why-label">
+            <span class="grad-text why-title">WHY</span>
+            <span class="why-sub">I STARTED THIS</span>
+          </div>
+          <div class="why-body">{D.why}</div>
+        </div>
+      </Glass>
+    </section>
+  {/if}
+
+  <!-- 3. Metrics -->
+  <section class="metrics-section">
+    <Glass>
+      <div class="metrics-grid">
+        {#each D.metrics as m}
+          <div class="metric-cell">
+            <div class="metric-label">{m.k}</div>
+            <div class="metric-values">
+              {#if m.before}
+                <span class="metric-before">{m.before}</span>
+                <span class="metric-arrow">&rarr;</span>
+              {/if}
+              <span class="metric-after grad-text">{m.after}</span>
+            </div>
+            <div class="metric-delta">{m.delta}</div>
+            <div class="metric-note">{m.note}</div>
+          </div>
+        {/each}
+      </div>
+    </Glass>
+  </section>
+
+  <!-- 4. Problem -->
+  <section class="problem-section">
+    <div class="section-label">&textcircled;1 PROBLEM</div>
+    <h2 class="problem-q">"{D.problemQ}"</h2>
+    <p class="problem-def">DEF. {D.problemDef}</p>
+  </section>
+
+  <!-- 5. SVG Canvas Demo (Kumo only) -->
   <section class="demo-section">
     <div class="demo-bar">
-      <span>LIVE · /demo/canvas.svg</span>
+      <span>LIVE &middot; /demo/canvas.svg</span>
       <span class="demo-dim">viewBox: {vb.x.toFixed(0)} {vb.y.toFixed(0)} {vb.w.toFixed(0)} {vb.h.toFixed(0)}</span>
-      <span class="demo-dim">drag · scroll to zoom</span>
+      <span class="demo-dim">drag &middot; scroll to zoom</span>
     </div>
     <!-- svelte-ignore a11y_no_static_element_interactions -->
     <svg
@@ -178,331 +194,656 @@
       onmouseup={onSvgUp}
       onmouseleave={onSvgUp}
       onwheel={onSvgWheel}
-      style="display: block; background: {ink}; cursor: {dragging ? 'grabbing' : 'grab'};"
+      style="display: block; background: #0C0D10; cursor: {dragging ? 'grabbing' : 'grab'};"
     >
       <defs>
         <pattern id="kdots" width="40" height="40" patternUnits="userSpaceOnUse">
-          <circle cx="2" cy="2" r="1" fill="{paper}30" />
+          <circle cx="2" cy="2" r="1" fill="#ECEEF21F" />
         </pattern>
       </defs>
       <rect x={vb.x - 2000} y={vb.y - 2000} width={vb.w + 4000} height={vb.h + 4000} fill="url(#kdots)" />
+      {#each lines as l}
+        <path d="M{l[0]} {l[1]} L{l[2]} {l[3]}" stroke="#7FE9E1" stroke-width="2" fill="none" opacity="0.7" />
+      {/each}
       {#each nodes as n}
         <g>
-          <rect x={n.x} y={n.y} width="160" height="64" fill={paper} stroke={accent} stroke-width="2" />
-          <text x={n.x + 12} y={n.y + 24} font-family="var(--font-mono)" font-size="11" fill="{ink}99">service</text>
-          <text x={n.x + 12} y={n.y + 46} font-family="var(--font-mono)" font-size="14" font-weight="700" fill={ink}>{n.label}</text>
+          <rect x={n.x} y={n.y} width="160" height="64" rx="8" fill="#ECEEF2" stroke="#7FE9E1" stroke-width="2" />
+          <text x={n.x + 12} y={n.y + 24} font-family="var(--font-mono)" font-size="11" fill="#7A8BAA">service</text>
+          <text x={n.x + 12} y={n.y + 46} font-family="var(--font-mono)" font-size="14" font-weight="700" fill="#0C0D10">{n.label}</text>
         </g>
-      {/each}
-      {#each lines as l}
-        <path d="M{l[0]} {l[1]} L{l[2]} {l[3]}" stroke={accent} stroke-width="2" fill="none" opacity="0.7" />
       {/each}
     </svg>
   </section>
 
-  <!-- Metrics -->
-  <section class="metrics-section">
-    <div class="metrics-grid">
-      {#each metrics as m, i}
-        <div class="metric-cell" class:border-r={i < 3}>
-          <div class="metric-label">{m.k}</div>
-          <div class="metric-values">
-            {#if m.before}
-              <span class="metric-before">{m.before}</span>
-            {/if}
-            <span class="metric-after">{m.after}</span>
-          </div>
-          <div class="metric-delta" style="background: {accent}; color: {onAccent};">{m.delta}</div>
-          <div class="metric-note">{m.note}</div>
+  <!-- 6. Decisions -->
+  <section class="decisions-section">
+    <div class="section-label">&textcircled;3 DECISIONS</div>
+    {#each D.decisions as d}
+      <div class="decision-row">
+        <span class="decision-n grad-text">{d.n}</span>
+        <h3 class="decision-title">{d.title}</h3>
+        <p class="decision-body">{d.body}</p>
+      </div>
+    {/each}
+  </section>
+
+  <!-- 7. Code Spotlight -->
+  {#if D.code}
+    <section class="code-section">
+      <div class="section-label">&textcircled;4 CODE &middot; {D.code.label}</div>
+      <div class="code-layout">
+        <div class="code-info">
+          <h3 class="code-title">{D.code.title}</h3>
+          <p class="code-desc">{D.code.desc}</p>
+        </div>
+        <Glass>
+          <pre class="code-block"><code>{D.code.body}</code></pre>
+        </Glass>
+      </div>
+    </section>
+  {/if}
+
+  <!-- 8. Outcome -->
+  <section class="outcome-section">
+    <div class="section-label">&textcircled;5 OUTCOME</div>
+    <h2 class="outcome-heading">
+      {#each D.outcomeHeadline.split('|') as part, i}
+        {#if i % 2 === 1}<span class="grad-text">{part}</span>{:else}{part}{/if}
+      {/each}
+    </h2>
+    <Glass>
+      <ul class="outcome-list">
+        {#each D.outcomes as o}
+          <li>{o}</li>
+        {/each}
+      </ul>
+    </Glass>
+  </section>
+
+  <!-- Gallery -->
+  <section class="gallery-section">
+    <div class="gallery-scroll">
+      {#each screenshots as ss}
+        <div class="gallery-item">
+          <img src={ss.src} alt={ss.alt} loading="lazy" />
+          <span class="gallery-caption">{ss.alt}</span>
         </div>
       {/each}
     </div>
   </section>
 
-  <!-- Problem -->
-  <section class="section">
-    <div class="section-label">① PROBLEM</div>
-    <div class="problem-grid">
-      <h2 class="problem-heading">
-        The library<br /><span style="background: {accent}; color: {onAccent}; padding: 0 6px;">hit its ceiling.</span>
-      </h2>
-      <div class="problem-body">
-        노코드 클라우드 빌더는 사용자가 수백 개 노드의 아키텍처를 한 화면에서 그릴 수 있어야 했습니다.
-        <strong>react-zoom-pan-pinch</strong>는 내부 transform 컨테이너에 크기 한계가 있어, 일정 규모를 넘으면 가장자리에서 잘리거나 좌표가 어긋났습니다.
-        <br /><br />
-        라이브러리를 패치하느니 직접 만드는 편이 빠르고 안정적이라고 판단했습니다.
+  <!-- 9. Related Writing -->
+  {#if related.length > 0}
+    <section class="related-section">
+      <div class="related-header">
+        <span class="section-label">&textcircled;6 RELATED WRITING</span>
+        <a href="/blog" class="all-posts-link">ALL POSTS &rarr;</a>
       </div>
+      <div class="related-grid" class:single={related.length === 1}>
+        {#each related as post}
+          <a href="/blog/{post.slug}" class="related-card-link">
+            <Glass hover>
+              <div class="related-card">
+                <div class="related-meta">
+                  <span class="grad-text related-tag"># {post.tag}</span>
+                  <span>{post.date}</span>
+                  <span>{post.readTime}</span>
+                </div>
+                <h4 class="related-title">{post.title}</h4>
+                <p class="related-excerpt">{post.excerpt}</p>
+              </div>
+            </Glass>
+          </a>
+        {/each}
+      </div>
+    </section>
+  {/if}
+
+  <!-- 10. Prev / Next -->
+  <section class="nav-section">
+    <div class="nav-cards">
+      <a href={caseAwarelab.route} class="nav-card-link">
+        <Glass hover>
+          <div class="nav-card">
+            <span class="nav-card-dir">&larr; Prev</span>
+            <span class="nav-card-title">{caseAwarelab.q}</span>
+          </div>
+        </Glass>
+      </a>
+      <a href={casePrestige.route} class="nav-card-link">
+        <Glass hover>
+          <div class="nav-card">
+            <span class="nav-card-dir">Next &rarr;</span>
+            <span class="nav-card-title">{casePrestige.q}</span>
+          </div>
+        </Glass>
+      </a>
     </div>
   </section>
 
-  <!-- Decisions -->
-  <section class="section">
-    <div class="section-label">② DECISIONS</div>
-    {#each decisions as d, i}
-      <div class="decision-row" class:decision-row-last={i === decisions.length - 1}>
-        <div class="decision-num">{d.n}</div>
-        <div class="decision-title">
-          <span style="background: {accent}; color: {onAccent}; padding: 0 4px;">{d.title}</span>
-        </div>
-        <div class="decision-body">{d.body}</div>
-      </div>
-    {/each}
-  </section>
-
-  <!-- Code -->
-  <section class="section">
-    <div class="section-label">③ CODE · pointer-anchored zoom</div>
-    <div class="code-grid">
-      <div>
-        <h3 class="code-heading">Keep the world point under the cursor.</h3>
-        <div class="code-desc">
-          줌 전후로 마우스가 가리키는 좌표가 같은 world point를 가리키도록 viewBox 원점을 재계산합니다.
-        </div>
-      </div>
-      <pre class="code-block">{codeSnippet}</pre>
-    </div>
-  </section>
-
-  <!-- Outcome -->
-  <section class="outcome-section">
-    <div class="outcome-label">④ OUTCOME</div>
-    <h2 class="outcome-heading">
-      A canvas <span style="color: {accent};">without limits</span>.<br />
-      A frontend that <span style="color: {accent};">doesn't drop frames.</span>
-    </h2>
-    <ul class="outcome-list">
-      <li>대규모 캔버스에서 <strong style="color: {accent};">60fps</strong> 유지.</li>
-      <li>5-slice store + 정규화로 <strong style="color: {accent};">메모리 30%↓</strong>, <strong style="color: {accent};">API 호출 50%↓</strong>.</li>
-      <li>SSE 기반 실시간 배포 시각화 — <strong style="color: {accent};">{'<100ms'}</strong> 지연.</li>
-    </ul>
-  </section>
-
-  <!-- Footer nav -->
-  <section class="case-nav">
-    <a href="/" class="case-nav-link">← BACK TO INDEX</a>
-    <a href="/case/prestige/" class="case-nav-link">NEXT · THE PRESTIGE →</a>
-  </section>
+  <!-- 11. Bottom link -->
+  <div class="bottom-link-section">
+    <a href="/projects" class="bottom-back">&larr; ALL PROJECTS</a>
+  </div>
 </div>
 
 <style>
-  .page-root {
+  .case-page {
     min-height: 100vh;
-    position: relative;
-    background-color: var(--paper);
-    color: var(--ink);
-    font-family: var(--font-display);
+    background: #0C0D10;
+    color: #ECEEF2;
+    font-family: var(--font-sans);
   }
 
-  .section {
-    padding: 72px 40px;
-    border-bottom: 2px solid var(--ink);
-  }
+  /* Section label */
   .section-label {
     font-family: var(--font-mono);
     font-size: 12px;
-    margin-bottom: 32px;
+    color: var(--dim);
+    letter-spacing: 0.06em;
+    margin-bottom: 24px;
   }
 
+  /* Title Section */
   .title-section {
-    padding: 100px 40px 64px;
-    border-bottom: 2px solid var(--ink);
+    padding: 80px 40px 40px;
+    max-width: 960px;
+    margin: 0 auto;
   }
-  .title-meta {
+  .meta-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: center;
     font-family: var(--font-mono);
     font-size: 12px;
-    margin-bottom: 24px;
-    display: flex;
-    gap: 32px;
-    flex-wrap: wrap;
+    color: var(--dim);
+    margin-bottom: 32px;
   }
-  .shipped-badge { padding: 2px 8px; }
-  .case-title {
-    font-family: var(--font-display);
-    font-size: clamp(64px, 11vw, 156px);
-    line-height: 0.88;
-    font-weight: 800;
+  .back-link {
+    color: var(--dim);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: #ECEEF2; }
+  .shipped-badge {
+    font-weight: 700;
+  }
+  .title-h1 {
+    font-size: clamp(56px, 9vw, 124px);
+    font-weight: 500;
     letter-spacing: -0.04em;
-    margin: 0;
-    text-transform: uppercase;
+    line-height: 0.92;
+    margin: 0 0 24px;
+    color: #ECEEF2;
   }
-  .title-desc {
-    margin-top: 32px;
-    max-width: 760px;
-    font-family: var(--font-mono);
-    font-size: 16px;
-    line-height: 1.7;
+  .one-liner {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 22px;
+    font-weight: 400;
+    color: #ECEEF2cc;
+    max-width: 700px;
+    margin: 0;
+    line-height: 1.4;
   }
 
-  /* Demo */
-  .demo-section {
-    border-bottom: 2px solid var(--ink);
-    background: var(--ink);
+  /* WHY Section */
+  .why-section {
+    padding: 0 40px 40px;
+    max-width: 960px;
+    margin: 0 auto;
   }
-  .demo-bar {
-    padding: 16px 40px;
-    color: var(--paper);
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
+  .why-grid {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 32px;
+    padding: 32px;
+  }
+  .why-label {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 4px;
   }
-  .demo-dim { opacity: 0.6; }
-  :global(.demo-svg) {
-    height: 500px;
-    display: block;
+  .why-title {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+  .why-sub {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--dim);
+    letter-spacing: 0.06em;
+  }
+  .why-body {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #ECEEF2ee;
   }
 
   /* Metrics */
   .metrics-section {
-    border-bottom: 2px solid var(--ink);
+    padding: 0 40px 32px;
+    max-width: 960px;
+    margin: 0 auto;
   }
   .metrics-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    padding: 24px;
   }
-  .metric-cell {
-    padding: 32px 24px;
-    font-family: var(--font-mono);
-  }
-  .metric-cell.border-r {
-    border-right: 2px solid var(--ink);
-  }
+  .metric-cell { padding: 16px; }
   .metric-label {
+    font-family: var(--font-mono);
     font-size: 11px;
-    opacity: 0.5;
-    letter-spacing: 0.1em;
+    color: var(--dim);
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
   }
   .metric-values {
     display: flex;
     align-items: baseline;
-    gap: 12px;
-    margin-top: 12px;
+    gap: 8px;
+    margin-bottom: 6px;
   }
   .metric-before {
+    font-family: var(--font-mono);
     font-size: 13px;
-    opacity: 0.5;
+    color: var(--dimmer);
     text-decoration: line-through;
   }
+  .metric-arrow {
+    font-size: 12px;
+    color: var(--dimmer);
+  }
   .metric-after {
-    font-size: 36px;
-    font-weight: 800;
-    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
     letter-spacing: -0.02em;
   }
   .metric-delta {
-    display: inline-block;
-    padding: 1px 6px;
-    margin-top: 8px;
-    font-size: 11px;
-    font-weight: 700;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: #7FE9E1;
+    margin-bottom: 4px;
   }
   .metric-note {
+    font-family: var(--font-mono);
     font-size: 11px;
-    opacity: 0.6;
-    margin-top: 8px;
+    color: var(--dimmer);
   }
 
-  .problem-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.6fr;
-    gap: 48px;
+  /* Problem */
+  .problem-section {
+    padding: 48px 40px;
+    max-width: 960px;
+    margin: 0 auto;
   }
-  .problem-heading {
-    font-size: 56px;
-    font-weight: 700;
-    line-height: 0.95;
-    letter-spacing: -0.03em;
-    margin: 0;
+  .problem-q {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(32px, 4.5vw, 56px);
+    line-height: 1.15;
+    font-weight: 400;
+    margin: 0 0 24px;
+    color: #ECEEF2;
   }
-  .problem-body {
-    font-family: var(--font-mono);
-    font-size: 15px;
-    line-height: 1.8;
-  }
-
-  .decision-row {
-    display: grid;
-    grid-template-columns: 100px 1fr 2fr;
-    border-top: 2px solid var(--ink);
-    padding: 28px 0;
-  }
-  .decision-row-last { border-bottom: 2px solid var(--ink); }
-  .decision-num { font-family: var(--font-mono); font-size: 32px; font-weight: 700; }
-  .decision-title { font-size: 22px; font-weight: 700; line-height: 1.2; padding-right: 24px; }
-  .decision-body { font-family: var(--font-mono); font-size: 14px; line-height: 1.7; }
-
-  .code-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 32px;
-    align-items: start;
-  }
-  .code-heading { font-size: 28px; font-weight: 700; line-height: 1.1; margin: 0; letter-spacing: -0.02em; }
-  .code-desc { margin-top: 16px; font-family: var(--font-mono); font-size: 14px; line-height: 1.7; }
-  .code-block {
-    background: var(--ink);
-    color: var(--paper);
-    padding: 24px;
-    font-size: 12px;
+  .problem-def {
+    font-size: 16px;
     line-height: 1.7;
-    font-family: var(--font-mono);
-    border: 2px solid var(--ink);
+    color: #ECEEF2cc;
+    max-width: 720px;
     margin: 0;
-    overflow: auto;
-    white-space: pre;
   }
 
-  .outcome-section {
-    padding: 72px 40px;
-    border-bottom: 2px solid var(--ink);
-    background: var(--ink);
-    color: var(--paper);
+  /* Demo */
+  .demo-section {
+    margin: 0 auto 48px;
+    padding: 0 40px;
+    max-width: 960px;
   }
-  .outcome-label { font-family: var(--font-mono); font-size: 12px; margin-bottom: 32px; color: var(--accent); }
-  .outcome-heading { font-size: clamp(48px, 7vw, 88px); font-weight: 800; line-height: 0.95; letter-spacing: -0.03em; margin: 0; }
-  .outcome-list { padding-left: 18px; margin-top: 32px; font-family: var(--font-mono); font-size: 14px; line-height: 1.9; }
-
-  .case-nav {
-    padding: 60px 40px;
+  .demo-section > :global(:last-child) {
+    border-radius: 0 0 16px 16px;
+    overflow: hidden;
+  }
+  .demo-bar {
+    padding: 14px 24px;
+    background: #0E1730;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: #ECEEF2;
+    border: 1px solid var(--line);
+    border-bottom: none;
+    border-radius: 16px 16px 0 0;
   }
-  .case-nav-link {
+  .demo-dim { color: var(--dim); }
+  :global(.demo-svg) {
+    height: 500px;
+    display: block;
+    border: 1px solid var(--line);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+  }
+
+  /* Decisions */
+  .decisions-section {
+    padding: 48px 40px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .decision-row {
+    display: grid;
+    grid-template-rows: 80px 1fr 2fr;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .decision-row:first-of-type {
+    border-top: 1px solid var(--line);
+  }
+  .decision-n {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+  }
+  .decision-title {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 20px;
+    font-weight: 400;
+    margin: 0;
+    line-height: 1.3;
+  }
+  .decision-body {
     font-family: var(--font-mono);
     font-size: 13px;
-    cursor: pointer;
-    text-decoration: none;
-    color: var(--ink);
+    line-height: 1.7;
+    color: var(--dim);
+    margin: 0;
   }
-  .case-nav-link:hover { text-decoration: underline; }
 
+  /* Code */
+  .code-section {
+    padding: 48px 40px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .code-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .code-title {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 26px;
+    font-weight: 400;
+    margin: 0 0 12px;
+    line-height: 1.2;
+  }
+  .code-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #ECEEF2cc;
+    margin: 0;
+  }
+  .code-block {
+    background: #06091A;
+    color: #ECEEF2;
+    padding: 24px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.7;
+    margin: 0;
+    overflow-x: auto;
+    white-space: pre;
+    border-radius: 12px;
+  }
+
+  /* Outcome */
+  .outcome-section {
+    padding: 60px 40px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .outcome-heading {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(40px, 6vw, 76px);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 0 0 32px;
+  }
+  .outcome-list {
+    list-style: none;
+    padding: 24px;
+    margin: 0;
+  }
+  .outcome-list li {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--dim);
+    padding: 6px 0;
+  }
+  .outcome-list li::before {
+    content: '\2192  ';
+    color: #7FE9E1;
+  }
+
+  /* Related Writing */
+  .related-section {
+    padding: 48px 40px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .related-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  .related-header .section-label {
+    margin-bottom: 0;
+  }
+  .all-posts-link {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--dim);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    transition: color 0.2s;
+  }
+  .all-posts-link:hover { color: #ECEEF2; }
+  .related-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .related-grid.single {
+    grid-template-columns: 1fr;
+  }
+  .related-card-link {
+    text-decoration: none;
+    color: #ECEEF2;
+  }
+  .related-card {
+    padding: 24px;
+  }
+  .related-meta {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--dim);
+    margin-bottom: 12px;
+  }
+  .related-tag {
+    font-weight: 700;
+  }
+  .related-title {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 20px;
+    font-weight: 400;
+    margin: 0 0 8px;
+    line-height: 1.3;
+  }
+  .related-excerpt {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #ECEEF299;
+    margin: 0;
+  }
+
+  /* Nav cards */
+  .nav-section {
+    padding: 40px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .nav-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .nav-card-link {
+    text-decoration: none;
+    color: #ECEEF2;
+  }
+  .nav-card {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .nav-card-dir {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--dim);
+    letter-spacing: 0.06em;
+  }
+  .nav-card-title {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  /* Bottom link */
+  .bottom-link-section {
+    padding: 20px 40px 60px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .bottom-back {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--dim);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .bottom-back:hover { color: #ECEEF2; }
+
+  /* Gallery */
+  .gallery-section {
+    padding: 32px 0 40px;
+    max-width: 100%;
+    overflow: hidden;
+  }
+  .gallery-scroll {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding: 0 40px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .gallery-scroll::-webkit-scrollbar { display: none; }
+  .gallery-item {
+    flex: 0 0 auto;
+    width: 560px;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .gallery-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    object-fit: cover;
+  }
+  .gallery-caption {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--dim);
+    letter-spacing: 0.04em;
+  }
+
+  /* Mobile */
   @media (max-width: 760px) {
-    .title-section { padding: 60px 20px 48px; }
-    .title-meta { gap: 16px; }
-    .section { padding: 48px 20px; }
-    .demo-bar { padding: 12px 20px; flex-wrap: wrap; gap: 8px; }
+    .title-section { padding: 60px 20px 32px; }
+    .why-section,
+    .metrics-section,
+    .code-section,
+    .outcome-section,
+    .related-section,
+    .nav-section { padding-left: 20px; padding-right: 20px; }
+    .problem-section,
+    .decisions-section { padding: 32px 20px; }
+    .demo-section { padding: 0 20px; }
+    .bottom-link-section { padding: 20px 20px 48px; }
+    .gallery-scroll { padding: 0 20px; }
+    .gallery-item { width: 400px; }
     .metrics-grid { grid-template-columns: repeat(2, 1fr); }
-    .metric-cell:nth-child(1), .metric-cell:nth-child(3) { border-right: 2px solid var(--ink); }
-    .metric-cell:nth-child(2).border-r { border-right: none; }
-    .metric-cell:nth-child(1), .metric-cell:nth-child(2) { border-bottom: 2px solid var(--ink); }
-    .problem-grid { grid-template-columns: 1fr; gap: 24px; }
-    .problem-heading { font-size: 36px; }
-    .decision-row { grid-template-columns: 1fr; gap: 12px; }
-    .code-grid { grid-template-columns: 1fr; }
-    .case-nav { padding: 40px 20px; flex-direction: column; gap: 16px; align-items: flex-start; }
+    .code-layout { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; gap: 16px; }
+    .nav-cards { grid-template-columns: 1fr; }
+    .related-grid { grid-template-columns: 1fr; }
+    .demo-bar { flex-wrap: wrap; gap: 8px; padding: 12px 16px; }
+    .decision-row {
+      grid-template-rows: auto auto auto;
+    }
+    .decision-n { font-size: 24px; }
   }
 
   @media (max-width: 480px) {
-    .title-section { padding: 40px 16px 32px; }
-    .section { padding: 36px 16px; }
-    .case-title { font-size: clamp(40px, 10vw, 64px); }
-    .outcome-heading { font-size: clamp(32px, 7vw, 48px); }
-    .outcome-section { padding: 48px 16px; }
-    .problem-heading { font-size: 28px; }
-    .metric-after { font-size: 28px; }
+    .title-section { padding: 48px 16px 24px; }
+    .why-section,
+    .metrics-section,
+    .code-section,
+    .outcome-section,
+    .related-section,
+    .nav-section { padding-left: 16px; padding-right: 16px; }
+    .problem-section,
+    .decisions-section { padding: 24px 16px; }
+    .demo-section { padding: 0 16px; }
+    .bottom-link-section { padding: 16px 16px 40px; }
+    .gallery-scroll { padding: 0 16px; }
+    .gallery-item { width: 300px; }
+    .metrics-grid { grid-template-columns: 1fr; }
+    .title-h1 { font-size: clamp(36px, 10vw, 56px); }
+    .problem-q { font-size: clamp(24px, 6vw, 32px); }
+    .metric-after { font-size: 22px; }
+    .outcome-heading { font-size: clamp(28px, 7vw, 40px); }
+    .code-block { font-size: 11px; padding: 16px; }
+    .demo-bar { font-size: 10px; }
     :global(.demo-svg) { height: 300px; }
-    .demo-bar { padding: 12px 16px; font-size: 10px; }
-    .case-nav { padding: 32px 16px; }
+    .meta-bar { gap: 12px; }
   }
 </style>
